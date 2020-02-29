@@ -31,4 +31,4 @@ GROUP BY pass_id;
 INSERT INTO q1
 SELECT PassAirCount.pass_id, firstname||surname, airlines
 FROM Passenger, PassAirCount
-WHERE Passener.id=PassAirCount.pass_id;
+WHERE Passenger.id=PassAirCount.pass_id;
