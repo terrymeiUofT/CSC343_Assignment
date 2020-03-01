@@ -32,7 +32,7 @@ DROP VIEW IF EXISTS PassNameAir CASCADE;
 CREATE VIEW PassNameAir AS
 SELECT PassAirCount.pass_id, firstname||surname, airlines
 FROM Passenger LEFT JOIN PassAirCount
-WHERE Passenger.id = PassAirCount.pass_id
+WHERE Passenger.id = PassAirCount.pass_id;
 
 -- Your query that answers the question goes below the "insert into" line:
 --INSERT INTO q1
