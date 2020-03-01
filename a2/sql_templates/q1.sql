@@ -35,5 +35,5 @@ FROM Passenger LEFT JOIN PassAirCount
 WHERE Passenger.id = PassAirCount.pass_id
 
 -- Your query that answers the question goes below the "insert into" line:
-INSERT INTO q1
-SELECT * FROM PassNameAir;
+--INSERT INTO q1
+--SELECT * FROM PassNameAir;
