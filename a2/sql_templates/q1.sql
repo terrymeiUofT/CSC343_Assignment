@@ -19,7 +19,8 @@ DROP VIEW IF EXISTS BookingFlight CASCADE;
 CREATE VIEW BookingFlight AS
 SELECT pass_id, flight_id, airline
 FROM Booking, Flight
-WHERE Booking.flight_id=Flight.id;
+WHERE Booking.flight_id=Flight.id AND Booking.flight_id IN
+    (SELECT flight_id FROM departure);
 
 DROP VIEW IF EXISTS PassAirCount CASCADE;
 CREATE VIEW PassAirCount AS
@@ -30,5 +31,5 @@ GROUP BY pass_id;
 -- Your query that answers the question goes below the "insert into" line:
 INSERT INTO q1
 SELECT PassAirCount.pass_id, firstname||surname, airlines
-FROM Passenger, PassAirCount
+FROM Passenger LEFT JOIN PassAirCount
 WHERE Passenger.id=PassAirCount.pass_id;
