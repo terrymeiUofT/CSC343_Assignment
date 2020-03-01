@@ -30,6 +30,6 @@ GROUP BY pass_id;
 
 -- Your query that answers the question goes below the "insert into" line:
 INSERT INTO q1
-SELECT PassAirCount.pass_id, firstname||surname, airlines
+SELECT Passenger.id, firstname||surname, airlines
 FROM Passenger LEFT JOIN PassAirCount
 ON Passenger.id = PassAirCount.pass_id;
