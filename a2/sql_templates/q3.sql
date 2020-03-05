@@ -48,7 +48,7 @@ GROUP BY out_city, in_city;
 DROP VIEW IF EXISTS Onecon_flight CASCADE;
 CREATE VIEW Onecon_flight AS
 SELECT F1.id, F1.outbound, F1.out_city, F1.out_country, F1.inbound con, F1.in_city con_city, F1.in_country con_country,
-F1.s_dep, F1.s_arv, F2.id, F2.inbound dest, F2.in_city dest_city, F2.in_country dest_country, F2.s_dep, F2.s_arv
+F1.s_dep, F1.s_arv, F2.id f2id, F2.inbound dest, F2.in_city dest_city, F2.in_country dest_country, F2.s_dep, F2.s_arv
 FROM All_flight F1, All_flight F2
 WHERE F1.inbound = F2.outbound AND (F2.s_dep - F1.s_arv) > time '00:30:00';
 
