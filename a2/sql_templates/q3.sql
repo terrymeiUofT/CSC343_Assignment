@@ -20,13 +20,13 @@ CREATE TABLE q3 (
 -- Define views for your intermediate steps here:
 DROP VIEW IF EXISTS Outcity_flight CASCADE;
 CREATE VIEW Outcity_flight AS
-SELECT id, outbound, city out_city, inbound, s_dep, s_arv
+SELECT id, outbound, city out_city, country out_country, inbound, s_dep, s_arv
 FROM Flight, Airport
 WHERE outbound = code;
 
 DROP VIEW IF EXISTS All_flight CASCADE;
 CREATE VIEW All_flight AS
-SELECT id, outbound, out_city, inbound, city in_city, s_dep, s_arv
+SELECT id, outbound, out_city, out_country, inbound, city in_city, country in_country, s_dep, s_arv
 FROM Outcity_flight, Airport
 WHERE inbound = code;
 
