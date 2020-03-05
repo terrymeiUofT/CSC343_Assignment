@@ -57,7 +57,7 @@ WHERE id = Departure.flight_id AND id = Arrival.flight_id;
 DROP VIEW IF EXISTS InterFlight_delay CASCADE;
 CREATE VIEW InterFlight_delay AS
 SELECT *, s_dep - s_arv s_delay, a_dep - a_arv a_delay
-FROM InterFlight_delay; 
+FROM Inter_Actual;
 
 
 
