@@ -54,12 +54,10 @@ SELECT id, airline, out_country, in_country, s_dep, s_arv, Departure.datetime a_
 FROM DomesticFlight, Departure, Arrival
 WHERE id = Departure.flight_id AND id = Arrival.flight_id;
 
-DROP VIEW IF EXISTS Refund_flight_35 CASCADE;
-CREATE VIEW Refund_flight_35 AS
-SELECT * FROM Inter_Actual
-WHERE ANY (SELECT (a_dep - s_dep) FROM Inter_Actual) >= time '04:00:00'
-AND ANY (SELECT (a_dep - s_dep) FROM Inter_Actual) < time '10:00:00'
-AND ANY(SELECT (a_arv - s_arv) FROM Inter_Actual) > 0.5*(SELECT (a_dep - s_dep) FROM Inter_Actual);
+DROP VIEW IF EXISTS InterFlight_delay CASCADE;
+CREATE VIEW InterFlight_delay AS
+SELECT *, s_dep - s_arv s_delay, a_dep - a_arv a_delay
+FROM InterFlight_delay; 
 
 
 
