@@ -64,16 +64,22 @@ CREATE VIEW DomeFlight_delay AS
 SELECT *, a_dep - s_dep dep_delay, a_arv - s_arv arv_delay
 FROM Dome_Actual;
 
-DROP VIEW IF EXISTS InterFlight_refund CASCADE;
-CREATE VIEW InterFlight_refund AS
-SELECT fid, airline, out_country, in_country, s_dep, s_arv, a_dep, a_arv, dep_delay, arv_delay, Booking.seat_class, Booking.price
+DROP VIEW IF EXISTS InterFlight_price CASCADE;
+CREATE VIEW InterFlight_price AS
+SELECT fid, airline, out_country, in_country, dep_delay, arv_delay, Booking.seat_class, Booking.price
 FROM InterFlight_delay, Booking
 WHERE fid = flight_id;
 
-DROP VIEW IF EXISTS DomeFlight_refund CASCADE;
-CREATE VIEW DomeFlight_refund AS
-SELECT fid, airline, out_country, in_country, s_dep, s_arv, a_dep, a_arv, dep_delay, arv_delay, Booking.seat_class, Booking.price
+DROP VIEW IF EXISTS DomeFlight_price CASCADE;
+CREATE VIEW DomeFlight_price AS
+SELECT fid, airline, out_country, in_country, dep_delay, arv_delay, Booking.seat_class, Booking.price
 FROM DomeFlight_delay, Booking
 WHERE fid = flight_id;
+
+DROP VIEW IF EXISTS DomeFlight_refund_50 CASCADE;
+CREATE VIEW DomeFlight_refund AS
+SELECT fid, airline, dep_delay, arv_delay, seat_class, price, 0.5*price refund
+FROM DomeFlight_price
+WHERE (time '12:00:00' =< ANY dep_delay) AND (arv_delay > 0.5*dep_delay);
 -- Your query that answers the question goes below the "insert into" line:
 --INSERT INTO q2
