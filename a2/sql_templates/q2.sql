@@ -54,5 +54,10 @@ SELECT id, airline, out_country, in_country, s_dep, s_arv, Departure.datetime a_
 FROM DomesticFlight, Departure, Arrival
 WHERE id = Departure.flight_id AND id = Arrival.flight_id;
 
+DROP VIEW IF EXISTS Refund_flight_35 CASCADE;
+CREATE VIEW Refund_flight_35 AS
+SELECT * FROM Inter_Actual
+WHERE a_dep - s_dep > time '04:00:00' AND a_arv - s_arv > time '02:00:00';
+
 -- Your query that answers the question goes below the "insert into" line:
 --INSERT INTO q2
