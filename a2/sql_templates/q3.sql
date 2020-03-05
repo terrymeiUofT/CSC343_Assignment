@@ -54,6 +54,11 @@ WHERE F1.inbound = F2.outbound AND (F2.s_dep - F1.s_arv) > time '00:30:00'
 AND F1.out_country != F2.in_country AND (F1.out_country = 'Canada' OR F1.out_country = 'USA')
 AND (F2.in_country = 'Canada' OR F2.in_country = 'USA');
 
+DROP VIEW IF EXISTS Onecon_flight_info CASCADE;
+CREATE VIEW Onecon_flight_info AS
+SELECT out_city outbound, dest_city inbound, count(*) one_con, MIN(s_arv) earliest
+FROM Onecon_flight
+GROUP BY out_city, dest_city;
 
 --DROP VIEW IF EXISTS Direct_flight CASCADE;
 --CREATE VIEW Direct_flight AS
