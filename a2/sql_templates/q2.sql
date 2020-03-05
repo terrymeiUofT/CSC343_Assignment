@@ -110,4 +110,8 @@ UNION
 UNION
 (SELECT * FROM DomeFlight_refund_50);
 -- Your query that answers the question goes below the "insert into" line:
---INSERT INTO q2
+INSERT INTO q2
+SELECT airline, Airline.name, EXTRACT(ISOYEAR FROM s_dep) year, seat_class, sum(refund)
+FROM Flight_refund, Airline
+WHERE airline = code
+GROUP BY airline, Airline.name, seat_class, year;
