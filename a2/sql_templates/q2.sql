@@ -66,13 +66,13 @@ FROM Dome_Actual;
 
 DROP VIEW IF EXISTS InterFlight_refund CASCADE;
 CREATE VIEW InterFlight_refund AS
-SELECT *, Booking.seat_class, Booking.price
+SELECT fid, airline, out_country, in_country, s_dep, s_arv, a_dep, a_arv, dep_delay, arv_delay, Booking.seat_class, Booking.price
 FROM InterFlight_delay, Booking
 WHERE fid = flight_id;
 
 DROP VIEW IF EXISTS DomeFlight_refund CASCADE;
 CREATE VIEW DomeFlight_refund AS
-SELECT *, Booking.seat_class, Booking.price
+SELECT fid, airline, out_country, in_country, s_dep, s_arv, a_dep, a_arv, dep_delay, arv_delay, Booking.seat_class, Booking.price
 FROM DomeFlight_delay, Booking
 WHERE fid = flight_id;
 -- Your query that answers the question goes below the "insert into" line:
