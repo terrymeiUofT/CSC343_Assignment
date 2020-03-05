@@ -20,9 +20,9 @@ CREATE TABLE q3 (
 -- Define views for your intermediate steps here:
 DROP VIEW IF EXISTS Outcity_flight CASCADE;
 CREATE VIEW Outcity_flight AS
-SELECT id, outbound, city out_city, country out_country, inbound, s_dep, s_arv
+SELECT id, outbound, city out_city, country out_country, inbound, s_dep, s_arv, EXTRACT(DATE FROM s_dep) s_date
 FROM Flight, Airport
-WHERE outbound = code AND EXTRACT(DATE FROM s_dep) = date '2020-04-30';
+WHERE outbound = code;
 
 DROP VIEW IF EXISTS All_flight CASCADE;
 CREATE VIEW All_flight AS
