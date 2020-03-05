@@ -15,11 +15,34 @@ CREATE TABLE q2 (
 -- Do this for each of the views that define your intermediate steps.  
 -- (But give them better names!) The IF EXISTS avoids generating an error 
 -- the first time this file is imported.
-DROP VIEW IF EXISTS intermediate_step CASCADE;
 
 
 -- Define views for your intermediate steps here:
+DROP VIEW IF EXISTS OutCountry CASCADE;
+CREATE VIEW OutCountry AS
+SELECT id, airline, outbound, out_country, inbound, scheduled_departure, scheduled_arrival
+FROM flight, airport
+WHERE flight.outbound = airport.code;
+
+DROP VIEW IF EXISTS InCountry CASCADE;
+CREATE VIEW InCountry AS
+SELECT id, airline, outbound, out_country, inbound, in_country, scheduled_departure, scheduled_arrival
+FROM OutCountry, airport
+WHERE Outcountry.inbound = airport.code;
+
+DROP VIEW IF EXISTS InternationalFlight CASCADE;
+CREATE VIEW InternationalFlight AS
+SELECT id, airline, out_country, in_country, scheduled_departure, scheduled_arrival
+FROM InCountry
+WHERE out_country != in_country;
+
+DROP VIEW IF EXISTS DomesticFlight CASCADE;
+CREATE VIEW DomesticFlight AS
+SELECT id, airline, out_country, in_country, scheduled_departure, scheduled_arrival
+FROM InCountry
+WHERE out_country = in_country;
+
 
 
 -- Your query that answers the question goes below the "insert into" line:
-INSERT INTO q2
+--INSERT INTO q2
