@@ -22,7 +22,7 @@ DROP VIEW IF EXISTS Outcity_flight CASCADE;
 CREATE VIEW Outcity_flight AS
 SELECT id, outbound, city out_city, country out_country, inbound, s_dep, s_arv
 FROM Flight, Airport
-WHERE outbound = code AND EXTRACT(ISODATE FROM s_dep) > date '2020-04-30';
+WHERE outbound = code AND EXTRACT(DATE FROM s_dep) = date '2020-04-30';
 
 DROP VIEW IF EXISTS All_flight CASCADE;
 CREATE VIEW All_flight AS
