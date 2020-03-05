@@ -46,13 +46,13 @@ DROP VIEW IF EXISTS Inter_Actual CASCADE;
 CREATE VIEW Inter_Actual AS
 SELECT id fid, airline, out_country, in_country, s_dep, s_arv, Departure.datetime a_dep, Arrival.datetime a_arv
 FROM InternationalFlight, Departure, Arrival
-WHERE fid = Departure.flight_id AND fid = Arrival.flight_id;
+WHERE id = Departure.flight_id AND id = Arrival.flight_id;
 
 DROP VIEW IF EXISTS Dome_Actual CASCADE;
 CREATE VIEW Dome_Actual AS
 SELECT id fid, airline, out_country, in_country, s_dep, s_arv, Departure.datetime a_dep, Arrival.datetime a_arv
 FROM DomesticFlight, Departure, Arrival
-WHERE fid = Departure.flight_id AND fid = Arrival.flight_id;
+WHERE id = Departure.flight_id AND id = Arrival.flight_id;
 
 DROP VIEW IF EXISTS InterFlight_delay CASCADE;
 CREATE VIEW InterFlight_delay AS
