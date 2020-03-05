@@ -60,6 +60,18 @@ SELECT out_city outbound, dest_city inbound, count(*) one_con, MIN(s_arv) earlie
 FROM Onecon_flight
 GROUP BY out_city, dest_city;
 
+DROP VIEW IF EXISTS Twocon_flight CASCADE;
+CREATE VIEW Twocon_flight AS
+SELECT F1.id f1id, F1.outbound, F1.out_city, F1.out_country,
+F1.inbound con, F1.in_city con_city, F1.s_dep, F1.s_arv,
+F2.id f2id, F2.inbound con2, F2.in_city con2_city, F2.s_dep f2dep, F2.s_arv f2arv,
+F3.id f3id, F3.inbound dest, F3.in_city dest_city, F3.s_dep f3dep, F3.s_arv f3arv
+FROM All_flight F1, All_flight F2, All_flight F3
+WHERE F1.inbound = F2.outbound AND F2.inbound = F3.outbound
+AND (F2.s_dep - F1.s_arv) > time '00:30:00' AND (F3.s_dep - F2.s_arv) > time '00:30:00'
+AND F1.out_country != F3.in_country AND (F1.out_country = 'Canada' OR F1.out_country = 'USA')
+AND (F3.in_country = 'Canada' OR F3.in_country = 'USA');
+
 --DROP VIEW IF EXISTS Direct_flight CASCADE;
 --CREATE VIEW Direct_flight AS
 --SELECT
