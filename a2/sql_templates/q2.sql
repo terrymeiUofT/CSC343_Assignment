@@ -57,8 +57,9 @@ WHERE id = Departure.flight_id AND id = Arrival.flight_id;
 DROP VIEW IF EXISTS Refund_flight_35 CASCADE;
 CREATE VIEW Refund_flight_35 AS
 SELECT * FROM Inter_Actual WHERE
-(SELECT (a_dep - s_dep) dep_delay, (a_arv - s_arv) arv_delay FROM Inter_Actual)
-dep_delay >= time '04:00:00' AND dep_delay < time '10:00:00' AND arv_delay > 0.5*dep_delay;
+(SELECT (a_dep - s_dep) FROM Inter_Actual) >= time '04:00:00'
+AND (SELECT (a_dep - s_dep) FROM Inter_Actual) < time '10:00:00'
+AND (SELECT (a_arv - s_arv) FROM Inter_Actual) > 0.5*(SELECT (a_dep - s_dep) FROM Inter_Actual);
 
 
 
