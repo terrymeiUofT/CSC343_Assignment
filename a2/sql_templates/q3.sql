@@ -22,13 +22,19 @@ DROP VIEW IF EXISTS Outcity_flight CASCADE;
 CREATE VIEW Outcity_flight AS
 SELECT id, outbound, city out_city, country out_country, inbound, s_dep, s_arv
 FROM Flight, Airport
-WHERE outbound = code;
+WHERE outbound = code AND EXTRACT(ISODATE FROM s_dep) = date '2020-04-30';
 
 DROP VIEW IF EXISTS All_flight CASCADE;
 CREATE VIEW All_flight AS
 SELECT id, outbound, out_city, out_country, inbound, city in_city, country in_country, s_dep, s_arv
 FROM Outcity_flight, Airport
 WHERE inbound = code;
+
+DROP VIEW IF EXISTS Direct_flight CASCADE;
+CREATE VIEW Direct_flight AS
+SELECT id, outbound, out_city, out_country, inbound, in_city, in_country, s_dep, s_arv
+FROM All_flight
+WHERE out_country ;
 
 --DROP VIEW IF EXISTS Direct_flight CASCADE;
 --CREATE VIEW Direct_flight AS
