@@ -77,9 +77,14 @@ CREATE VIEW Twocon_flight_info AS
 SELECT out_city outbound, dest_city inbound, count(*) two_con, MIN(s_arv) earliest
 FROM Twocon_flight
 GROUP BY out_city, dest_city;
---DROP VIEW IF EXISTS Direct_flight CASCADE;
---CREATE VIEW Direct_flight AS
---SELECT
 
+DROP VIEW IF EXISTS Combined_info CASCADE;
+CREATE VIEW Combined_info AS
+SELECT outbound, inbound, direct, Dir.earliest earliest_dir, One.earliest earliest_one, Two.earliest earliest_two,
+FROM Direct_flight_info Dir, Onecon_flight_info One, Twocon_flight_info Two
+WHERE Dir.outbound = One.outbound AND Dir.outbound = Two.outbound AND One.outbound = Two.outbound
+AND Dir.inbound = One.inbound AND Dir.inbound = Two.inbound AND One.inbound = Two.inbound;
 -- Your query that answers the question goes below the "insert into" line:
--- INSERT INTO q3
+--INSERT INTO q3
+
+
