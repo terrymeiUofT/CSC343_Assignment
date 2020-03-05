@@ -21,7 +21,7 @@ CREATE TABLE q3 (
 DROP VIEW IF EXISTS Outcity_flight CASCADE;
 CREATE VIEW Outcity_flight AS
 SELECT id, outbound, city out_city, country out_country, inbound, s_dep, s_arv,
-EXTRACT(YEAR FROM s_dep) as dep_year, EXTRACT(DOY FROM s_dep) as dep_doy
+EXTRACT(YEAR FROM s_dep) as dep_year, EXTRACT(DOY FROM s_dep) as dep_doy,
 EXTRACT(YEAR FROM s_arv) as arv_year, EXTRACT(DOY FROM s_arv) as arv_doy
 FROM Flight, Airport
 WHERE outbound = code;
