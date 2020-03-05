@@ -80,7 +80,7 @@ GROUP BY out_city, dest_city;
 
 DROP VIEW IF EXISTS Combined_info CASCADE;
 CREATE VIEW Combined_info AS
-SELECT outbound, inbound, direct, Dir.earliest earliest_dir, One.earliest earliest_one, Two.earliest earliest_two,
+SELECT outbound, inbound, direct, Dir.earliest earliest_dir, One.earliest earliest_one, Two.earliest earliest_two
 FROM Direct_flight_info Dir, Onecon_flight_info One, Twocon_flight_info Two
 WHERE Dir.outbound = One.outbound AND Dir.outbound = Two.outbound AND One.outbound = Two.outbound
 AND Dir.inbound = One.inbound AND Dir.inbound = Two.inbound AND One.inbound = Two.inbound;
