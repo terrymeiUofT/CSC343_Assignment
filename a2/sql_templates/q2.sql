@@ -96,7 +96,7 @@ WHERE (time '04:00:00' <= dep_delay) AND (time '10:00:00' > dep_delay) AND (arv_
 
 DROP VIEW IF EXISTS DomeFlight_refund_50 CASCADE;
 CREATE VIEW DomeFlight_refund_50 AS
-SELECT fid, airline, s_dep, dep_delay, arv_delay, seat_class, price, 0.5*price refund
+SELECT fid, airline, EXTRACT(ISOYEAR FROM s_dep) year, dep_delay, arv_delay, seat_class, price, 0.5*price refund
 FROM DomeFlight_price
 WHERE (time '10:00:00' <= dep_delay) AND (arv_delay > 0.5*dep_delay);
 
@@ -110,8 +110,8 @@ UNION
 UNION
 (SELECT * FROM DomeFlight_refund_50);
 -- Your query that answers the question goes below the "insert into" line:
-INSERT INTO q2
-SELECT airline, Airline.name, EXTRACT(ISOYEAR FROM s_dep) year, seat_class, sum(refund)
-FROM Flight_refund, Airline
-WHERE airline = code
-GROUP BY airline, Airline.name, seat_class, year;
+--INSERT INTO q2
+--SELECT airline, Airline.name, year, seat_class, sum(refund)
+--FROM Flight_refund, Airline
+--WHERE airline = code
+--GROUP BY airline, Airline.name, seat_class, year;
