@@ -102,15 +102,12 @@ WHERE (time '10:00:00' <= dep_delay) AND (arv_delay > 0.5*dep_delay);
 
 DROP VIEW IF EXISTS Flight_refund CASCADE;
 CREATE VIEW Flight_refund AS
-SELECT * FROM InterFlight_refund_35;
-
-INSERT INTO Flight_refund
-SELECT * FROM InterFlight_refund_50;
-
-INSERT INTO Flight_refund
-SELECT * FROM DomeFlight_refund_35;
-
-INSERT INTO Flight_refund
-SELECT * FROM DomeFlight_refund_50;
+(SELECT * FROM InterFlight_refund_35)
+UNION
+(SELECT * FROM InterFlight_refund_50)
+UNION
+(SELECT * FROM DomeFlight_refund_35)
+UNION
+(SELECT * FROM DomeFlight_refund_50);
 -- Your query that answers the question goes below the "insert into" line:
 --INSERT INTO q2
