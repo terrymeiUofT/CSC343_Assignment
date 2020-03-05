@@ -80,6 +80,6 @@ DROP VIEW IF EXISTS DomeFlight_refund_50 CASCADE;
 CREATE VIEW DomeFlight_refund AS
 SELECT fid, airline, dep_delay, arv_delay, seat_class, price, 0.5*price refund
 FROM DomeFlight_price
-WHERE (time '12:00:00' =< ANY dep_delay) AND (arv_delay > 0.5*dep_delay);
+WHERE (time '12:00:00' =< dep_delay) AND (arv_delay > 0.5*dep_delay);
 -- Your query that answers the question goes below the "insert into" line:
 --INSERT INTO q2
