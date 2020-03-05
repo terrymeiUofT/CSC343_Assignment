@@ -42,7 +42,17 @@ SELECT id, airline, out_country, in_country, s_dep, s_arv
 FROM InCountry
 WHERE out_country = in_country;
 
+DROP VIEW IF EXISTS Inter_Actual CASCADE;
+CREATE VIEW Inter_Actual AS
+SELECT id, airline, out_country, in_country, s_dep, s_arv, Departure.datetime a_dep, Arrival.datetime a_arv
+FROM InternationalFlight, Departure, Arrival
+WHERE id = Departure.flight_id AND id = Arrival.flight_id;
 
+DROP VIEW IF EXISTS Dome_Actual CASCADE;
+CREATE VIEW Dome_Actual AS
+SELECT id, airline, out_country, in_country, s_dep, s_arv, Departure.datetime a_dep, Arrival.datetime a_arv
+FROM DomesticFlight, Departure, Arrival
+WHERE id = Departure.flight_id AND id = Arrival.flight_id;
 
 -- Your query that answers the question goes below the "insert into" line:
 --INSERT INTO q2
