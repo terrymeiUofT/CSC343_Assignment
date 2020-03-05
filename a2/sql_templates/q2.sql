@@ -64,5 +64,16 @@ CREATE VIEW DomeFlight_delay AS
 SELECT *, a_dep - s_dep dep_delay, a_arv - s_arv arv_delay
 FROM Dome_Actual;
 
+DROP VIEW IF EXISTS InterFlight_refund CASCADE;
+CREATE VIEW InterFlight_refund AS
+SELECT *, Booking.seat_class, Booking.price
+FROM InterFlight_delay, Booking
+WHERE id = flight_id;
+
+DROP VIEW IF EXISTS DomeFlight_refund CASCADE;
+CREATE VIEW DomeFlight_refund AS
+SELECT *, Booking.seat_class, Booking.price
+FROM DomeFlight_delay, Booking
+WHERE id = flight_id;
 -- Your query that answers the question goes below the "insert into" line:
 --INSERT INTO q2
