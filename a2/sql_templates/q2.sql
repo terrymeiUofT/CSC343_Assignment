@@ -80,7 +80,7 @@ DROP VIEW IF EXISTS InterFlight_refund_35 CASCADE;
 CREATE VIEW InterFlight_refund_35 AS
 SELECT fid, airline, s_dep, dep_delay, arv_delay, seat_class, price, 0.35*price refund
 FROM InterFlight_price
-WHERE (time '07:00:00' <= dep_delay) AND (arv_delay > 0.5*dep_delay);
+WHERE (time '07:00:00' <= dep_delay) AND (time '12:00:00' > dep_delay) AND (arv_delay > 0.5*dep_delay);
 
 DROP VIEW IF EXISTS InterFlight_refund_50 CASCADE;
 CREATE VIEW InterFlight_refund_50 AS
@@ -92,7 +92,7 @@ DROP VIEW IF EXISTS DomeFlight_refund_35 CASCADE;
 CREATE VIEW DomeFlight_refund_35 AS
 SELECT fid, airline, s_dep, dep_delay, arv_delay, seat_class, price, 0.35*price refund
 FROM DomeFlight_price
-WHERE (time '04:00:00' <= dep_delay) AND (arv_delay > 0.5*dep_delay);
+WHERE (time '04:00:00' <= dep_delay) AND (time '10:00:00' > dep_delay) AND (arv_delay > 0.5*dep_delay);
 
 DROP VIEW IF EXISTS DomeFlight_refund_50 CASCADE;
 CREATE VIEW DomeFlight_refund_50 AS
