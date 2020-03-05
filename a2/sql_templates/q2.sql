@@ -66,37 +66,37 @@ FROM Dome_Actual;
 
 DROP VIEW IF EXISTS InterFlight_price CASCADE;
 CREATE VIEW InterFlight_price AS
-SELECT fid, airline, out_country, in_country, dep_delay, arv_delay, Booking.seat_class, Booking.price
+SELECT fid, airline, out_country, in_country, s_dep, dep_delay, arv_delay, Booking.seat_class, Booking.price
 FROM InterFlight_delay, Booking
 WHERE fid = flight_id;
 
 DROP VIEW IF EXISTS DomeFlight_price CASCADE;
 CREATE VIEW DomeFlight_price AS
-SELECT fid, airline, out_country, in_country, dep_delay, arv_delay, Booking.seat_class, Booking.price
+SELECT fid, airline, out_country, in_country, s_dep, dep_delay, arv_delay, Booking.seat_class, Booking.price
 FROM DomeFlight_delay, Booking
 WHERE fid = flight_id;
 
 DROP VIEW IF EXISTS InterFlight_refund_35 CASCADE;
 CREATE VIEW InterFlight_refund_35 AS
-SELECT fid, airline, dep_delay, arv_delay, seat_class, price, 0.5*price refund
+SELECT fid, airline, s_dep, dep_delay, arv_delay, seat_class, price, 0.35*price refund
 FROM InterFlight_price
 WHERE (time '07:00:00' <= dep_delay) AND (arv_delay > 0.5*dep_delay);
 
 DROP VIEW IF EXISTS InterFlight_refund_50 CASCADE;
 CREATE VIEW InterFlight_refund_50 AS
-SELECT fid, airline, dep_delay, arv_delay, seat_class, price, 0.5*price refund
+SELECT fid, airline, s_dep, dep_delay, arv_delay, seat_class, price, 0.5*price refund
 FROM InterFlight_price
 WHERE (time '12:00:00' <= dep_delay) AND (arv_delay > 0.5*dep_delay);
 
 DROP VIEW IF EXISTS DomeFlight_refund_35 CASCADE;
 CREATE VIEW DomeFlight_refund_35 AS
-SELECT fid, airline, dep_delay, arv_delay, seat_class, price, 0.5*price refund
+SELECT fid, airline, s_dep, dep_delay, arv_delay, seat_class, price, 0.35*price refund
 FROM DomeFlight_price
 WHERE (time '04:00:00' <= dep_delay) AND (arv_delay > 0.5*dep_delay);
 
 DROP VIEW IF EXISTS DomeFlight_refund_50 CASCADE;
 CREATE VIEW DomeFlight_refund_50 AS
-SELECT fid, airline, dep_delay, arv_delay, seat_class, price, 0.5*price refund
+SELECT fid, airline, s_dep, dep_delay, arv_delay, seat_class, price, 0.5*price refund
 FROM DomeFlight_price
 WHERE (time '10:00:00' <= dep_delay) AND (arv_delay > 0.5*dep_delay);
 
