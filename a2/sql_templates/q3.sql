@@ -21,7 +21,8 @@ CREATE TABLE q3 (
 DROP VIEW IF EXISTS Outcity_flight CASCADE;
 CREATE VIEW Outcity_flight AS
 SELECT id, outbound, city out_city, country out_country, inbound, s_dep, s_arv,
-EXTRACT(YEAR FROM s_dep) as year, EXTRACT(DOY FROM s_dep) as doy
+EXTRACT(YEAR FROM s_dep) as dep_year, EXTRACT(DOY FROM s_dep) as dep_doy
+EXTRACT(YEAR FROM s_arv) as arv_year, EXTRACT(DOY FROM s_arv) as arv_doy
 FROM Flight, Airport
 WHERE outbound = code;
 
@@ -29,7 +30,7 @@ DROP VIEW IF EXISTS All_flight CASCADE;
 CREATE VIEW All_flight AS
 SELECT id, outbound, out_city, out_country, inbound, city in_city, country in_country, s_dep, s_arv
 FROM Outcity_flight, Airport
-WHERE inbound = code AND year = 2020 AND doy = 121;
+WHERE inbound = code AND dep_year = 2020 AND dep_doy = 121 AND arv_year = 2020 AND arv_doy = 121;
 
 DROP VIEW IF EXISTS Direct_flight CASCADE;
 CREATE VIEW Direct_flight AS
@@ -37,6 +38,12 @@ SELECT id, outbound, out_city, out_country, inbound, in_city, in_country, s_dep,
 FROM All_flight
 WHERE out_country != in_country AND (out_country = 'Canada' OR out_country = 'USA')
 AND (in_country = 'Canada' OR in_country = 'USA');
+
+DROP VIEW IF EXISTS Direct_flight_info CASCADE;
+CREATE VIEW Direct_flight_info AS
+SELECT out_city outbound, in_city inbound, count(*) direct, MIN(s_arv) earliest
+FROM Direct_flight
+GROUP BY out_city, in_city;
 
 --DROP VIEW IF EXISTS Direct_flight CASCADE;
 --CREATE VIEW Direct_flight AS
