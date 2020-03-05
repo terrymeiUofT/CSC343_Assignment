@@ -35,8 +35,8 @@ DROP VIEW IF EXISTS Direct_flight CASCADE;
 CREATE VIEW Direct_flight AS
 SELECT id, outbound, out_city, out_country, inbound, in_city, in_country, s_dep, s_arv
 FROM All_flight
-WHERE out_country != in_country AND (out_country = 'Canada' || out_country = 'USA')
-AND (in_country = 'Canada' || in_country = 'USA');
+WHERE out_country != in_country AND (out_country = 'Canada' OR out_country = 'USA')
+AND (in_country = 'Canada' OR in_country = 'USA');
 
 --DROP VIEW IF EXISTS Direct_flight CASCADE;
 --CREATE VIEW Direct_flight AS
