@@ -20,9 +20,9 @@ CREATE TABLE q2 (
 -- Define views for your intermediate steps here:
 DROP VIEW IF EXISTS OutCountry CASCADE;
 CREATE VIEW OutCountry AS
-SELECT id, airline, outbound, country out_country, inbound, flight.scheduled_departure, flight.scheduled_arrival
-FROM flight, airport
-WHERE flight.outbound = airport.code;
+SELECT id, airline, outbound, country out_country, inbound, scheduled_departure, scheduled_arrival
+FROM Flight, Airport
+WHERE Flight.outbound = Airport.code;
 
 DROP VIEW IF EXISTS InCountry CASCADE;
 CREATE VIEW InCountry AS
