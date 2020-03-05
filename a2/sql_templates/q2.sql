@@ -28,7 +28,7 @@ DROP VIEW IF EXISTS InCountry CASCADE;
 CREATE VIEW InCountry AS
 SELECT id, airline, outbound, out_country, inbound, country as in_country, scheduled_departure, scheduled_arrival
 FROM OutCountry, airport
-WHERE Outcountry.inbound = airport.code;
+WHERE OutCountry.inbound = airport.code;
 
 DROP VIEW IF EXISTS InternationalFlight CASCADE;
 CREATE VIEW InternationalFlight AS
