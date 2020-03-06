@@ -173,7 +173,7 @@ public class Assignment2 {
         Assignment2 a2 = new Assignment2();
         a2.connectDB("jdbc:postgresql://localhost:5432/csc343h-meitian1", "meitian1", "");
         a2.getBookingID();
-        a2.getPrice(1, 'first');
+        a2.getPrice(1, "first");
         a2.disconnectDB();
       } catch (SQLException se) {
         System.out.println("failed to establish connection in main");
