@@ -148,10 +148,10 @@ public class Assignment2 {
       String queryString;
       int price = -1;
       try {
-        queryString = "SELECT ? as ticketprice FROM price, flight WHERE flight.id = price.id AND flight.id = ?";
+        queryString = "SELECT ? as ticketprice FROM Price WHERE id = ?";
         pStatement = connection.prepareStatement(queryString);
-        pStatement.setString(1, Integer.toString(flightID));
-        pStatement.setString(2, seatClass);
+        pStatement.setString(1, seatClass);
+        pStatement.setString(2, Integer.toString(flightID));
         rs = pStatement.executeQuery();
         while (rs.next()) {
             price = rs.getInt("ticketprice");
