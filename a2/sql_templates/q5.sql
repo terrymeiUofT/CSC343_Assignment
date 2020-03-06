@@ -28,12 +28,16 @@ SELECT n FROM q5_parameters;
 -- Your query that answers the question goes below the "insert into" line:
 INSERT INTO q5
 WITH RECURSIVE Flight_hopping AS (
-    (SELECT inbound node, s_arv node_arv, 1 as num_flights FROM Flight
+    (SELECT id, inbound node, s_arv node_arv, 1 as num_flights FROM Flight
     WHERE outbound = 'YYZ' AND s_dep >= (SELECT day FROM day)
     AND s_dep < (SELECT day FROM day) + time '24:00:00')
     UNION ALL
-    (SELECT inbound node, s_arv node_arv, num_flights+1 FROM Flight
-    WHERE outbound = node AND s_dep > node_arv AND (s_dep < node_arv + time '24:00:00')
+    (SELECT Flight.id, Flight.inbound node, Flight.s_arv node_arv, Flight_hopping.num_flights+1
+    FROM Flight, Flight_hopping
+    WHERE Flight.id = Flight_hopping.id
+    AND Flight.outbound = Flight_hopping.node
+    AND Flight.s_dep > Flight_hopping.node_arv
+    AND (Flight.s_dep < Flight_hopping.node_arv + time '24:00:00')
     AND num_flights < (SELECT n FROM n))
 )
 
