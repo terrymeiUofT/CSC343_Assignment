@@ -96,6 +96,6 @@ ON outbound = city;
 -- Your query that answers the question goes below the "insert into" line:
 INSERT INTO q3
 SELECT DISTINCT outbound, city inbound, direct, one_con, two_con, earliest
-FROM Join_name RIGHT JOIN airport
+FROM Join_name LEFT JOIN airport
 ON inbound = city;
 
