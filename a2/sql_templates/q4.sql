@@ -46,7 +46,7 @@ DROP VIEW IF EXISTS Departed_percent CASCADE;
 CREATE VIEW Departed_percent AS
 SELECT C.airline, C.plane tail_number, (booked::float)/capacity as percentage
 FROM Departed_capacity C LEFT JOIN Departed_booking B
-WHERE C.airline = B.airline AND C.plane = B.plane;
+ON C.airline = B.airline AND C.plane = B.plane;
 
 -- Your query that answers the question goes below the "insert into" line:
 --INSERT INTO q4
