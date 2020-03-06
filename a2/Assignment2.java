@@ -150,7 +150,6 @@ public class Assignment2 {
       try {
         queryString = "SELECT "+seatClass+" AS ticket FROM price WHERE flight_id=" + Integer.toString(flightID) + ";";
         pStatement = connection.prepareStatement(queryString);
-        //pStatement.setString(1, Integer.toString(flightID));
         rs = pStatement.executeQuery();
         if (rs.next()) {
             price = rs.getInt("ticket");
@@ -162,7 +161,36 @@ public class Assignment2 {
       }
       return -1;
    }
-  
+
+   private int getSeatRow(int flightID, String seatClass){
+      PreparedStatement pStatement;
+      ResultSet rs;
+      String queryString;
+      int row = -1;
+      int max_row = -1;
+      String max_letter = "";
+
+      try {
+        queryString = "SELECT MAX(seat_row) as max_row, MAX(seat_letter) as max_letter ";
+        queryString += "FROM Booking WHERE seat_class = " + seatClass + ";"
+        pStatement = connection.prepareStatement(queryString);
+        rs = pStatement.executeQuery();
+        if (rs.next()) {
+            max_row = rs.getInt("max_row");
+            max_letter = rs.getString("max_letter");
+        }
+        if max_letter == "F" {
+            row = max_row + 1;
+        } else {
+            row = max_row;
+        }
+        System.out.println("row is: " + row);
+        return row;
+      } catch (SQLException se) {
+        System.err.println("SQL Exception." + "<Message>: " + se.getMessage());
+      }
+      return -1;
+   }
   /* ----------------------- Main method below  ------------------------- */
 
    public static void main(String[] args) {
