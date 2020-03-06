@@ -88,7 +88,7 @@ AND Dir.inbound = One.inbound AND Dir.inbound = Two.inbound AND One.inbound = Tw
 
 DROP VIEW IF EXISTS City_pair CASCADE;
 CREATE VIEW City_pair AS
-SELECT C1.city inbound, C2.city outbound
+SELECT DISTINCT C1.city inbound, C2.city outbound
 FROM Airport C1, Airport C2
 WHERE C1.city != C2.city AND C1.country = 'Canada' OR C1.country = 'USA'
 AND C2.country = 'Canada' OR C2.country = 'USA';
