@@ -129,8 +129,12 @@ public class Assignment2 {
    public static void main(String[] args) {
       // You can put testing code in here. It will not affect our autotester.
       System.out.println("Running the code!");
-      Assignment2 a2 = new Assignment2();
-      a2.connectDB("jdbc:postgresql://localhost:5432/csc343h-meitian1", "meitian1", "");
+      try {
+        Assignment2 a2 = new Assignment2();
+        a2.connectDB("jdbc:postgresql://localhost:5432/csc343h-meitian1", "meitian1", "");
+      } catch (SQLException se) {
+        System.out.println("failed to establish connection in main");
+      }
    }
 
 }
