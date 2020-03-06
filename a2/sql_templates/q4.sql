@@ -33,5 +33,11 @@ FROM flight, departure,
     FROM booking GROUP BY flight_id) count
 WHERE flight.id = departure.flight_id AND flight.id = count.flight_id;
 
+DROP VIEW IF EXISTS Departed_percent CASCADE;
+CREATE VIEW Departed_percent AS
+SELECT airline, plane tail_number, (booked/capacity) as percentage
+FROM Departed_capacity C, Departed_booking B
+WHERE C.airline = B.airline AND C.plane = B.plane;
+
 -- Your query that answers the question goes below the "insert into" line:
 --INSERT INTO q4
