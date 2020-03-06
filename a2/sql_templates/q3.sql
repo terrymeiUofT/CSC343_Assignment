@@ -87,10 +87,7 @@ WHERE Dir.outbound = One.outbound AND Dir.outbound = Two.outbound AND One.outbou
 AND Dir.inbound = One.inbound AND Dir.inbound = Two.inbound AND One.inbound = Two.inbound;
 -- Your query that answers the question goes below the "insert into" line:
 INSERT INTO q3
-SELECT outbound, inbound, direct, one_con, two_con, earliest FROM
-    (SELECT outbound, inbound, direct, one_con, two_con, LEAST(earliest_dir, earliest_one, earliest_two) as earliest
-    FROM Combined_info RIGHT JOIN airport
-    ON outbound = city) a
-    RIGHT JOIN airport
-ON a.inbound = city;
+SELECT outbound, inbound, direct, one_con, two_con, LEAST(earliest_dir, earliest_one, earliest_two) as earliest
+FROM Combined_info RIGHT JOIN airport
+ON outbound = city;
 
