@@ -79,7 +79,7 @@ public class Assignment2 {
     */
    public boolean bookSeat(int passID, int flightID, String seatClass) {
       // Implement this method!
-
+      price = getPrice(flightID, seatClass);
 
 
       return false;
@@ -151,8 +151,8 @@ public class Assignment2 {
       try {
         queryString = "SELECT first as ticket FROM Price WHERE flight_id = ?";
         pStatement = connection.prepareStatement(queryString);
-        //pStatement.setString(1, seatClass);
-        pStatement.setString(1, Integer.toString(flightID));
+        pStatement.setString(1, seatClass);
+        pStatement.setString(2, Integer.toString(flightID));
         rs = pStatement.executeQuery();
         while (rs.next()) {
             price = rs.getInt("ticket");
@@ -177,7 +177,7 @@ public class Assignment2 {
         Assignment2 a2 = new Assignment2();
         a2.connectDB("jdbc:postgresql://localhost:5432/csc343h-meitian1", "meitian1", "");
         BookingID = a2.getBookingID();
-        price = a2.getPrice(1, seatClass);
+        a2.bookSeat(1, 1, "first");
         a2.disconnectDB();
       } catch (SQLException se) {
         System.out.println("failed to establish connection in main");
