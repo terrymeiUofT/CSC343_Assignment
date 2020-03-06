@@ -89,5 +89,5 @@ AND Dir.inbound = One.inbound AND Dir.inbound = Two.inbound AND One.inbound = Tw
 INSERT INTO q3
 SELECT city outbound, inbound, direct, one_con, two_con, LEAST(earliest_dir, earliest_one, earliest_two) as earliest
 FROM Combined_info, airport
-ON outbound = city;
+WHERE outbound = city;
 
