@@ -39,7 +39,7 @@ public class Assignment2 {
       } catch (SQLException se) {
         return false;
       }
-      //System.out.println("Connection established!");
+      System.out.println("Connection established!");
       return true;
    }
 
@@ -56,6 +56,7 @@ public class Assignment2 {
         } catch (SQLException se) {
             return false;
         }
+        System.out.println("Connection disconnected!");
         return true;
       }
       return false;
