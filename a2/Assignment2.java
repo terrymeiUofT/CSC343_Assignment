@@ -81,6 +81,7 @@ public class Assignment2 {
       // Implement this method!
 
 
+
       return false;
    }
 
@@ -212,7 +213,6 @@ public class Assignment2 {
         if (max_letter.equals("F")) {
             letter = "A";
         } else if (max_letter.equals("A")) {
-            System.out.println("max_letter is: " + max_letter);
             letter = "B";
         } else if (max_letter.equals("B")) {
             letter = "C";
@@ -231,6 +231,51 @@ public class Assignment2 {
       return "";
 
    }
+
+   private boolean check_valid(int flightID, String seatClass){
+      PreparedStatement pStatement;
+      ResultSet rs;
+      String queryString;
+      int booked = -1;
+      int class_cap = -1;
+
+      try {
+        queryString = "SELECT count(*) as booked FROM Booking WHERE flight_id = " + Integer.toString(flightID);
+        queryString += " AND seat_class = '"+ seatClass + "';";
+        pStatement = connection.prepareStatement(queryString);
+        rs = pStatement.executeQuery();
+        if (rs.next()) {
+            booked = rs.getInt("booked");
+        }
+      } catch (SQLException se) {
+        System.err.println("SQL Exception." + "<Message>: " + se.getMessage());
+      }
+
+      try {
+        queryString = "SELECT capacity_" + seatClass + " FROM Flight, Plane ";
+        queryString += "WHERE flight.id = " + Integer.toString(flightID) + " AND plane = tail_number;";
+        pStatement = connection.prepareStatement(queryString);
+        rs = pStatement.executeQuery();
+        if (rs.next()) {
+            class_cap = rs.getInt("capacity_" + seatClass);
+        }
+      } catch (SQLException se) {
+        System.err.println("SQL Exception." + "<Message>: " + se.getMessage());
+      }
+
+      if (booked > class_cap) {
+        if (seatClass.equals('economy') {
+            if (booked - class_cap < 10){
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+      }
+      return false;
+   }
   /* ----------------------- Main method below  ------------------------- */
 
    public static void main(String[] args) {
@@ -240,13 +285,17 @@ public class Assignment2 {
       int price;
       int flightID = 5;
       String seatClass = "first";
+      boolean valid;
+
       try {
         Assignment2 a2 = new Assignment2();
         a2.connectDB("jdbc:postgresql://localhost:5432/csc343h-meitian1", "meitian1", "");
         a2.getBookingID();
-        a2.getPrice(flightID, seatClass);
+        a2.getPrice(flightID, seatClass);   
         a2.getSeatRow(flightID, seatClass);
         a2.getSeatLetter(flightID, seatClass);
+        valid = a2.check_valid(flightID, seatClass);
+        System.out.println("valid: " + valid);
         a2.disconnectDB();
       } catch (SQLException se) {
         System.out.println("failed to establish connection in main");
