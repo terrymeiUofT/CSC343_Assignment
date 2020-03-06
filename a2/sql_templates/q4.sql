@@ -66,6 +66,8 @@ ADD COLUMN normal INT DEFAULT 0;
 ALTER Table Departed_hist
 ADD COLUMN high INT DEFAULT 0;
 
+DROP VIEW IF EXISTS Departed_result CASCADE;
+CREATE VIEW Departed_result AS
 SELECT airline, tail_number,
     CASE WHEN percentage >= 0 AND percentage < 0.2 THEN 1
          ELSE 0 END
