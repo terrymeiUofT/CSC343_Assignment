@@ -90,4 +90,4 @@ FROM Departed_hist;
 INSERT INTO q4
 SELECT airline, tail_number, SUM(very_low) as very_low, SUM(low) as low, SUM(fair) as fair,
 SUM(normal) as normal, SUM(high) as high
-FROM Departed_hist GROUP BY airline, tail_number;
+FROM Departed_result GROUP BY airline, tail_number;
