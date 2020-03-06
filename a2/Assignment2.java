@@ -313,7 +313,7 @@ public class Assignment2 {
             queryString += "VALUES( "+Integer.toString(id)+", ";
             queryString += Integer.toString(pass_id)+", ";
             queryString += Integer.toString(flight_id)+", ";
-            queryString += (datetime::timestamp(0)).toString() + ", ";
+            queryString += datetime.toString() + ", ";
             queryString += Integer.toString(price)+", ";
             queryString += seat_class + ", ";
             queryString += Integer.toString(seat_row)+", ";
@@ -329,11 +329,13 @@ public class Assignment2 {
             queryString += "VALUES( " + Integer.toString(id) + ", ";
             queryString += Integer.toString(pass_id) + ", ";
             queryString += Integer.toString(flight_id) + ", ";
-            queryString += (datetime::timestamp(0)).toString() + ", ";
+            queryString += "(?::timestamp(0)), "
+            //queryString += datetime.toString() + ", ";
             queryString += Integer.toString(price) + ", ";
             queryString += "'economy'" + ", ";
             queryString += "0, 'temp');";
             pStatement = connection.prepareStatement(queryString);
+            pStatement.setString(1, datetime);
             pStatement.executeUpdate();
           } catch (SQLException se) {
             System.err.println("SQL Exception. helo" + "<Message>: " + se.getMessage());
