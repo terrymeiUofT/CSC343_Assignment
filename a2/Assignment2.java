@@ -79,6 +79,7 @@ public class Assignment2 {
     */
    public boolean bookSeat(int passID, int flightID, String seatClass) {
       // Implement this method!
+      boolean check;
       boolean valid;
       int BookingID;
       Timestamp curtime;
@@ -93,20 +94,16 @@ public class Assignment2 {
       SeatRow = getSeatRow(flightID, seatClass);
       SeatLetter = getSeatLetter(flightID, seatClass);
 
-      if (valid) {
-        try{
-            book_it(BookingID, passID, flightID, curtime, Price, seatClass, SeatRow, SeatLetter);
-            return true;
-        } catch (SQLException se) {
-            return false;
-        }
-      } else{
-        try{
-            book_it(BookingID, passID, flightID, curtime, Price, seatClass, -1, "");
-            return true;
-        } catch (SQLException se) {
-            return false;
-        }
+      if (check) {
+          if (valid) {
+             book_it(BookingID, passID, flightID, curtime, Price, seatClass, SeatRow, SeatLetter);
+             return true;
+          } else{
+             book_it(BookingID, passID, flightID, curtime, Price, seatClass, -1, "");
+             return true;
+          }
+      } else {
+          return false;
       }
    }
 
