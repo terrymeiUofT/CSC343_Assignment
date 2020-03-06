@@ -151,8 +151,7 @@ public class Assignment2 {
       try {
         queryString = "SELECT "+seatClass+ " AS book_price FROM price WHERE flight_id=?;";
         pStatement = connection.prepareStatement(queryString);
-        pStatement.setString(1, seatClass);
-        //pStatement.setString(2, Integer.toString(flightID));
+        pStatement.setString(1, Integer.toString(flightID));
         rs = pStatement.executeQuery();
         if (rs.next()) {
             price = rs.getInt("ticket");
