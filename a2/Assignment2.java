@@ -81,7 +81,7 @@ public class Assignment2 {
       // Implement this method!
       boolean valid;
       int BookingID;
-      timestamp curtime;
+      Timestamp curtime;
       int Price;
       int SeatRow;
       String SeatLetter;
@@ -295,7 +295,7 @@ public class Assignment2 {
       return false;
    }
 
-   private void book_it(int id, int pass_id, int flight_id, timestamp datetime, int price, String seat_class, int seat_row, String seat_letter) {
+   private void book_it(int id, int pass_id, int flight_id, Timestamp datetime, int price, String seat_class, int seat_row, String seat_letter) {
       PreparedStatement pStatement;
       ResultSet rs;
       String queryString;
