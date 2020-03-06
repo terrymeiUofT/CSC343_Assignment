@@ -21,9 +21,18 @@ CREATE TABLE q4 (
 -- Define views for your intermediate steps here:
 DROP VIEW IF EXISTS Departed_capacity CASCADE;
 CREATE VIEW Departed_capacity AS
-SELECT DISTINCT flight.airline, plane, (capacity_first + capacity_business + capacity_economy) as capacity
-FROM flight, departure, plane
-WHERE flight.id = departure.flight_id AND flight.plane = plane.tail_number;
+SELECT DISTINCT departed.airline, plane, (capacity_first + capacity_business + capacity_economy) as capacity
+FROM Plane LEFT JOIN
+    (SELECT flight.airline, plane
+    FROM flight LEFT JOIN departure
+    ON flight.id = departure.flight_id) departed
+ON Departed.plane = Plane.tail_number;
+
+--DROP VIEW IF EXISTS Departed_capacity CASCADE;
+--CREATE VIEW Departed_capacity AS
+--SELECT DISTINCT flight.airline, plane, (capacity_first + capacity_business + capacity_economy) as capacity
+--FROM flight, departure, plane
+--WHERE flight.id = departure.flight_id AND flight.plane = plane.tail_number;
 
 DROP VIEW IF EXISTS Departed_booking CASCADE;
 CREATE VIEW Departed_booking AS
