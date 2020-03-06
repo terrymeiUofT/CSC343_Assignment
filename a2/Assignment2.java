@@ -310,14 +310,14 @@ public class Assignment2 {
       if ((seat_row != -1) & (seat_letter != "")){
             try {
             queryString = "INSERT INTO Booking ";
-            queryString += "SELECT "+Integer.toString(id)+", ";
+            queryString += "VALUES( "+Integer.toString(id)+", ";
             queryString += Integer.toString(pass_id)+", ";
             queryString += Integer.toString(flight_id)+", ";
             queryString += datetime.toString() + ", ";
             queryString += Integer.toString(price)+", ";
             queryString += seat_class + ", ";
             queryString += Integer.toString(seat_row)+", ";
-            queryString += seat_letter + ";";
+            queryString += seat_letter + ");";
             pStatement = connection.prepareStatement(queryString);
             pStatement.executeUpdate();
           } catch (SQLException se) {
@@ -326,13 +326,13 @@ public class Assignment2 {
       } else{
            try {
             queryString = "INSERT INTO Booking ";
-            queryString += "SELECT "+Integer.toString(id)+", ";
-            queryString += Integer.toString(pass_id)+", ";
-            queryString += Integer.toString(flight_id)+", ";
+            queryString += "VALUES( " + Integer.toString(id) + ", ";
+            queryString += Integer.toString(pass_id) + ", ";
+            queryString += Integer.toString(flight_id) + ", ";
             queryString += datetime.toString() + ", ";
-            queryString += Integer.toString(price)+", ";
+            queryString += Integer.toString(price) + ", ";
             queryString += seat_class + ", ";
-            queryString += "NULL, NULL;";
+            queryString += "NULL, NULL);";
             pStatement = connection.prepareStatement(queryString);
             pStatement.executeUpdate();
           } catch (SQLException se) {
