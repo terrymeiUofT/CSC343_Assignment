@@ -37,10 +37,9 @@ public class Assignment2 {
         connection = DriverManager.getConnection(URL, username, password);
         connection.prepareStatement("SET search_path TO air_travel, public;").executeUpdate();
       } catch (SQLException se) {
-        System.out.println("Connection failed!");
         return false;
       }
-      System.out.println("Connection established!");
+      //System.out.println("Connection established!");
       return true;
    }
 
@@ -129,6 +128,12 @@ public class Assignment2 {
         a2.connectDB("jdbc:postgresql://localhost:5432/csc343h-meitian1", "meitian1", "");
       } catch (SQLException se) {
         System.out.println("failed to establish connection in main");
+      }
+
+      try {
+        a2.disconnectDB();
+      } catch (SQLException se) {
+        System.out.println("failed to disconnect connection in main");
       }
    }
 
