@@ -174,8 +174,6 @@ public class Assignment2 {
         queryString = "SELECT MAX(row) as max_row, MAX(letter) as max_letter ";
         queryString += "FROM Booking WHERE flight_id = " + Integer.toString(flightID);
         queryString += " AND seat_class = '"+ seatClass + "';";
-        //queryString = "SELECT MAX(row) as max_row, MAX(letter) as max_letter FROM Booking WHERE flight_id = 5 AND seat_class = 'economy';";
-         //+ seatClass + ";";
         pStatement = connection.prepareStatement(queryString);
         rs = pStatement.executeQuery();
         if (rs.next()) {
@@ -194,6 +192,44 @@ public class Assignment2 {
       }
       return -1;
    }
+
+   private String getSeatLetter(int flightID, String seatClass){
+      PreparedStatement pStatement;
+      ResultSet rs;
+      String queryString;
+      String max_letter = "";
+      String letter = "";
+
+      try {
+        queryString = "SELECT MAX(letter) as max_letter ";
+        queryString += "FROM Booking WHERE flight_id = " + Integer.toString(flightID);
+        queryString += " AND seat_class = '"+ seatClass + "';";
+        pStatement = connection.prepareStatement(queryString);
+        rs = pStatement.executeQuery();
+        if (rs.next()) {
+            max_letter = rs.getString("max_letter");
+        }
+        if (max_letter == "F") {
+            letter = "A";
+        } else if (max_letter == "A") {
+            letter = "B";
+        } else if (max_letter == "B") {
+            letter = "C";
+        } else if (max_letter == "C") {
+            letter = "D";
+        } else if (max_letter == "D") {
+            letter = "E";
+        } else if (max_letter == "E") {
+            letter = "F";
+        }
+        System.out.println("row is: " + row);
+        return row;
+      } catch (SQLException se) {
+        System.err.println("SQL Exception." + "<Message>: " + se.getMessage());
+      }
+      return -1;
+
+   }
   /* ----------------------- Main method below  ------------------------- */
 
    public static void main(String[] args) {
@@ -209,6 +245,7 @@ public class Assignment2 {
         a2.getBookingID();
         a2.getPrice(flightID, seatClass);
         a2.getSeatRow(flightID, seatClass);
+        a2.getSeatLetter(flightID, seatClass);
         a2.disconnectDB();
       } catch (SQLException se) {
         System.out.println("failed to establish connection in main");
