@@ -90,6 +90,6 @@ INSERT INTO q3
 SELECT DISTINCT outbound, city inbound, direct, one_con, two_con, earliest FROM
     (SELECT DISTINCT city outbound, inbound, direct, one_con, two_con, LEAST(earliest_dir, earliest_one, earliest_two) as earliest
     FROM Combined_info RIGHT JOIN airport
-    ON outbound = city) a FULL JOIN airport
+    ON outbound = city) a RIGHT JOIN airport
 ON a.inbound = city;
 
