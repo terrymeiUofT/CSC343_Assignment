@@ -313,7 +313,7 @@ public class Assignment2 {
             queryString += "VALUES( "+Integer.toString(id)+", ";
             queryString += Integer.toString(pass_id)+", ";
             queryString += Integer.toString(flight_id)+", ";
-            queryString += datetime::timestamp(0).toString() + ", ";
+            queryString += (datetime::timestamp(0)).toString() + ", ";
             queryString += Integer.toString(price)+", ";
             queryString += seat_class + ", ";
             queryString += Integer.toString(seat_row)+", ";
@@ -329,7 +329,7 @@ public class Assignment2 {
             queryString += "VALUES( " + Integer.toString(id) + ", ";
             queryString += Integer.toString(pass_id) + ", ";
             queryString += Integer.toString(flight_id) + ", ";
-            queryString += datetime::timestamp(0).toString() + ", ";
+            queryString += (datetime::timestamp(0)).toString() + ", ";
             queryString += Integer.toString(price) + ", ";
             queryString += "'economy'" + ", ";
             queryString += "0, 'temp');";
