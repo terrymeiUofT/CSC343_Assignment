@@ -87,7 +87,7 @@ AND (C2.country = 'Canada' OR C2.country = 'USA');
 
 DROP VIEW IF EXISTS Combined_info CASCADE;
 CREATE VIEW Combined_info AS
-SELECT Dir.outbound, Dir.inbound, direct, Dir.earliest earliest_dir
+SELECT City_pair.outbound, City_pair.inbound, direct, Dir.earliest earliest_dir
 FROM Direct_flight_info Dir RIGHT JOIN City_pair
 ON Dir.outbound = City_pair.outbound AND Dir.inbound = City_pair.inbound;
 
