@@ -361,6 +361,17 @@ public class Assignment2 {
         //valid = a2.check_valid(flightID, seatClass);
         //System.out.println("valid: " + valid);
         a2.bookSeat(6, flightID, seatClass);
+        try {
+            queryString = "SELECT * FROM Booking;";
+            pStatement = connection.prepareStatement(queryString);
+            rs = pStatement.executeQuery();
+            while (rs.next()) {
+                int bid = rs.getInt(id);
+                System.out.println("bid: " + bid);
+            }
+        } catch (SQLException se) {
+            System.err.println("SQL Exception." + "<Message>: " + se.getMessage());
+        }
         a2.disconnectDB();
       } catch (SQLException se) {
         System.out.println("failed to establish connection in main");
