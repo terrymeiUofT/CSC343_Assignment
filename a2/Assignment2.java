@@ -211,7 +211,8 @@ public class Assignment2 {
         }
         if (max_letter == "F") {
             letter = "A";
-        } else if (max_letter == "A") {
+        }
+        if (max_letter == "A") {
             System.out.println("max_letter is: " + max_letter);
             letter = "B";
         } else if (max_letter == "B") {
