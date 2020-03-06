@@ -17,11 +17,14 @@ CREATE TABLE q4 (
 -- Do this for each of the views that define your intermediate steps.  
 -- (But give them better names!) The IF EXISTS avoids generating an error 
 -- the first time this file is imported.
-DROP VIEW IF EXISTS intermediate_step CASCADE;
-
 
 -- Define views for your intermediate steps here:
+DROP VIEW IF EXISTS Departed_flight CASCADE;
+CREATE VIEW Departed_flight AS
+SELECT id, airline, plane, (capacity_first + capacity_business, capacity_economy) as capacity
+FROM flight, departure, plane
+WHERE flight.id = departure.flight_id AND flight.plane = plane.tail_number;
 
 
 -- Your query that answers the question goes below the "insert into" line:
-INSERT INTO q4
+--INSERT INTO q4
