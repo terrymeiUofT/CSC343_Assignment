@@ -307,9 +307,9 @@ public class Assignment2 {
         queryString += Integer.toString(flight_id)+", ";
         queryString += Integer.toString(datetime)+", ";
         queryString += Integer.toString(price)+", ";
-        queryString += Integer.toString(seatClass)+", ";
+        queryString += seatClass + ", ";
         queryString += Integer.toString(seat_row)+", ";
-        queryString += Integer.toString(seat_letter)+";";
+        queryString += seat_letter + ";";
         pStatement = connection.prepareStatement(queryString);
       } catch (SQLException se) {
         System.err.println("SQL Exception." + "<Message>: " + se.getMessage());
