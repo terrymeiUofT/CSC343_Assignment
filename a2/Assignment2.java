@@ -126,12 +126,13 @@ public class Assignment2 {
       PreparedStatement pStatement;
       ResultSet rs;
       String queryString;
+      int BookingID = -1;
       try {
         queryString = "SELECT MAX(id) as max_id FROM Booking";
         pStatement = connection.prepareStatement(queryString);
         rs = pStatement.executeQuery();
         while (rs.next()) {
-            int BookingID = rs.getInt(max_id) + 1;
+            BookingID = rs.getInt(max_id) + 1;
             System.out.println("New BookingID is: " + BookingID);
         }
         return BookingID;
