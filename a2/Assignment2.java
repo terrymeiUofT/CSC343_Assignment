@@ -150,7 +150,7 @@ public class Assignment2 {
       try {
         queryString = "SELECT ? as ticketprice FROM price, flight WHERE flight.id = price.id AND flight.id = ?";
         pStatement = connection.prepareStatement(queryString);
-        pStatement.setString(1, flightID.toString());
+        pStatement.setString(1, Integer.toString(flightID));
         pStatement.setString(2, seatClass);
         rs = pStatement.executeQuery();
         while (rs.next()) {
