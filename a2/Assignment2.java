@@ -38,7 +38,7 @@ public class Assignment2 {
       String setpath_query;
 
       try {
-        connection = DriverManager.getConnection(url, username, password);
+        connection = DriverManager.getConnection(URL, username, password);
         setpath_query = "SET SEARCH_PATH to air_travel, public";
         pStatement = connection.prepareStatement(setpath_query);
         rs = pStatement.executeQuery();
@@ -128,6 +128,7 @@ public class Assignment2 {
    public static void main(String[] args) {
       // You can put testing code in here. It will not affect our autotester.
       System.out.println("Running the code!");
+      connectDB("jdbc:postgresql://localhost:5432/csc343h-meitian1", "meitian1", "")
    }
 
 }
