@@ -319,7 +319,7 @@ public class Assignment2 {
             queryString += Integer.toString(seat_row)+", ";
             queryString += seat_letter + ";";
             pStatement = connection.prepareStatement(queryString);
-            rs = pStatement.executeUpdate();
+            pStatement.executeUpdate();
           } catch (SQLException se) {
             System.err.println("SQL Exception." + "<Message>: " + se.getMessage());
           }
@@ -334,7 +334,7 @@ public class Assignment2 {
             queryString += seat_class + ", ";
             queryString += "NULL, NULL;";
             pStatement = connection.prepareStatement(queryString);
-            rs = pStatement.executeUpdate();
+            pStatement.executeUpdate();
           } catch (SQLException se) {
             System.err.println("SQL Exception." + "<Message>: " + se.getMessage());
           }
