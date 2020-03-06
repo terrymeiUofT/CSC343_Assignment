@@ -19,12 +19,19 @@ CREATE TABLE q4 (
 -- the first time this file is imported.
 
 -- Define views for your intermediate steps here:
-DROP VIEW IF EXISTS Departed_flight CASCADE;
-CREATE VIEW Departed_flight AS
+DROP VIEW IF EXISTS Departed_capacity CASCADE;
+CREATE VIEW Departed_capacity AS
 SELECT DISTINCT flight.airline, plane, (capacity_first + capacity_business + capacity_economy) as capacity
 FROM flight, departure, plane
 WHERE flight.id = departure.flight_id AND flight.plane = plane.tail_number;
 
+DROP VIEW IF EXISTS Departed_booking CASCADE;
+CREATE VIEW Departed_booking AS
+SELECT flight.airline, plane, count.booked
+FROM flight, departure,
+    (SELECT flight_id, count(*) booked
+    FROM booking GROUP BY flight_id) count
+WHERE flight.id = departure.flight_id AND flight.id = count.flight_id;
 
 -- Your query that answers the question goes below the "insert into" line:
 --INSERT INTO q4
