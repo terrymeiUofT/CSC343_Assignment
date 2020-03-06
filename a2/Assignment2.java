@@ -32,15 +32,10 @@ public class Assignment2 {
    * @return           true if connecting is successful, false otherwise
    */
    public boolean connectDB(String URL, String username, String password) {
-      PreparedStatement pStatement;
-      ResultSet rs;
-      String setpath_query;
       // Implement this method!
       try {
         connection = DriverManager.getConnection(URL, username, password);
-        //setpath_query = "SET SEARCH_PATH to air_travel, public";
-        //pStatement = connection.prepareStatement(setpath_query);
-        //rs = pStatement.executeQuery();
+        connection.prepareStatement("SET search_path TO air_travel, public;").executeUpdate();
       } catch (SQLException se) {
         System.out.println("Connection failed!");
         return false;
