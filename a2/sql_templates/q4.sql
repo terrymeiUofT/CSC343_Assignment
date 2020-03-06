@@ -48,7 +48,10 @@ SELECT C.airline, C.plane tail_number, (booked::float)/capacity as percentage
 FROM Departed_capacity C LEFT JOIN Departed_booking B
 ON C.airline = B.airline AND C.plane = B.plane;
 
-ALTER VIEW Departed_percent
+CREATE TABLE Departed_hist AS
+SELECT * FROM Departed_percent;
+
+ALTER Table Departed_hist
 ADD COLUMN very_low INT DEFAULT 0;
 
 -- Your query that answers the question goes below the "insert into" line:
