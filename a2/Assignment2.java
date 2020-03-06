@@ -212,6 +212,7 @@ public class Assignment2 {
         if (max_letter == "F") {
             letter = "A";
         } else if (max_letter == "A") {
+            System.out.println("max_letter is: " + max_letter);
             letter = "B";
         } else if (max_letter == "B") {
             letter = "C";
@@ -222,7 +223,7 @@ public class Assignment2 {
         } else if (max_letter == "E") {
             letter = "F";
         }
-        System.out.println("letter is: " + max_letter);
+        System.out.println("letter is: " + letter);
         return letter;
       } catch (SQLException se) {
         System.err.println("SQL Exception." + "<Message>: " + se.getMessage());
