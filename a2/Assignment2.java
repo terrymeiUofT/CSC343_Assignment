@@ -196,11 +196,11 @@ public class Assignment2 {
   /* ----------------------- Main method below  ------------------------- */
 
    public static void main(String[] args) {
-      // You can put testing code in here. It will not affect our autotester.
+      // You can put testing code in here. It wiWll not affect our autotester.
       System.out.println("Running the code!");
       int BookingID;
       int price;
-      int flightID = 1;
+      int flightID = 5;
       String seatClass = "first";
       try {
         Assignment2 a2 = new Assignment2();
