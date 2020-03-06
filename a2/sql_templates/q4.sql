@@ -48,6 +48,7 @@ SELECT C.airline, C.plane tail_number, coalesce((booked::float)/capacity, 0) as 
 FROM Departed_capacity C LEFT JOIN Departed_booking B
 ON C.airline = B.airline AND C.plane = B.plane;
 
+DROP TABLE IF EXISTS Departed_hist CASCADE;
 CREATE TABLE Departed_hist AS
 SELECT * FROM Departed_percent;
 
