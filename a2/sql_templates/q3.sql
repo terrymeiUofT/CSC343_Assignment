@@ -88,6 +88,6 @@ AND Dir.inbound = One.inbound AND Dir.inbound = Two.inbound AND One.inbound = Tw
 -- Your query that answers the question goes below the "insert into" line:
 INSERT INTO q3
 SELECT city outbound, inbound, direct, one_con, two_con, LEAST(earliest_dir, earliest_one, earliest_two) as earliest
-FROM Combined_info RIGHT JOIN airport
+FROM Combined_info, airport
 ON outbound = city;
 
