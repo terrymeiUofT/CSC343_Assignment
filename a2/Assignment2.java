@@ -335,7 +335,7 @@ public class Assignment2 {
             queryString += "'economy'" + ", ";
             queryString += "0, 'temp');";
             pStatement = connection.prepareStatement(queryString);
-            pStatement.setString(1, datetime.toString();
+            pStatement.setString(1, datetime.toString());
             pStatement.executeUpdate();
           } catch (SQLException se) {
             System.err.println("SQL Exception. helo" + "<Message>: " + se.getMessage());
