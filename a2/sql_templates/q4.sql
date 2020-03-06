@@ -45,7 +45,7 @@ WHERE flight.id = departure.flight_id AND flight.id = count.flight_id;
 DROP VIEW IF EXISTS Departed_percent CASCADE;
 CREATE VIEW Departed_percent AS
 SELECT C.airline, C.plane tail_number, (booked::float)/capacity as percentage
-FROM Departed_capacity C, Departed_booking B
+FROM Departed_capacity C LEFT JOIN Departed_booking B
 WHERE C.airline = B.airline AND C.plane = B.plane;
 
 -- Your query that answers the question goes below the "insert into" line:
