@@ -44,7 +44,7 @@ WHERE flight.id = departure.flight_id AND flight.id = count.flight_id;
 
 DROP VIEW IF EXISTS Departed_percent CASCADE;
 CREATE VIEW Departed_percent AS
-SELECT C.airline, C.plane tail_number, (booked::float)/capacity as percentage
+SELECT C.airline, C.plane tail_number, coalesce((booked::float)/capacity, 0) as percentage
 FROM Departed_capacity C LEFT JOIN Departed_booking B
 ON C.airline = B.airline AND C.plane = B.plane;
 
@@ -65,5 +65,11 @@ ADD COLUMN normal INT DEFAULT 0;
 
 ALTER Table Departed_hist
 ADD COLUMN high INT DEFAULT 0;
+
+SELECT airline, tail_number,
+    CASE WHEN percentage >= 0 AND percentage < 20 THEN 1
+         ELSE 0 END
+         AS very_low
+FROM Departed_hist;
 -- Your query that answers the question goes below the "insert into" line:
 --INSERT INTO q4
