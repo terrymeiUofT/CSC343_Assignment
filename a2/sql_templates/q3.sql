@@ -85,11 +85,17 @@ Dir.earliest earliest_dir, One.earliest earliest_one, Two.earliest earliest_two
 FROM Direct_flight_info Dir, Onecon_flight_info One, Twocon_flight_info Two
 WHERE Dir.outbound = One.outbound AND Dir.outbound = Two.outbound AND One.outbound = Two.outbound
 AND Dir.inbound = One.inbound AND Dir.inbound = Two.inbound AND One.inbound = Two.inbound;
+
+DROP VIEW IF EXISTS Join_name CASCADE;
+CREATE VIEW Join_name AS
+SELECT DISTINCT city outbound, inbound, direct, one_con, two_con,
+LEAST(earliest_dir, earliest_one, earliest_two) as earliest
+FROM Combined_info RIGHT JOIN airport
+ON outbound = city;
+
 -- Your query that answers the question goes below the "insert into" line:
 INSERT INTO q3
-SELECT DISTINCT outbound, city inbound, direct, one_con, two_con, earliest FROM
-    (SELECT DISTINCT city outbound, inbound, direct, one_con, two_con, LEAST(earliest_dir, earliest_one, earliest_two) as earliest
-    FROM Combined_info RIGHT JOIN airport
-    ON outbound = city) a RIGHT JOIN airport
-ON a.inbound = city;
+SELECT DISTINCT outbound, city inbound, direct, one_con, two_con, earliest
+FROM Join_name RIGHT JOIN airport
+ON inbound = city;
 
