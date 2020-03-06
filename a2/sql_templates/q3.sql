@@ -97,6 +97,13 @@ SELECT Combined_info.outbound, Combined_info.inbound, direct, one_con,
 earliest_dir, One.earliest earliest_one
 FROM Combined_info LEFT JOIN Onecon_flight_info One
 ON One.outbound = Combined_info.outbound AND One.inbound = Combined_info.inbound;
+
+DROP VIEW IF EXISTS Combined_info3 CASCADE;
+CREATE VIEW Combined_info3 AS
+SELECT Combined_info2.outbound, Combined_info2.inbound, direct, one_con, two_con
+earliest_dir, earliest_one, Two.earliest earliest_two
+FROM Combined_info2 LEFT JOIN Twocon_flight_info Two
+ON Two.outbound = Combined_info2.outbound AND Two.inbound = Combined_info2.inbound;
 -- Your query that answers the question goes below the "insert into" line:
 --INSERT INTO q3
 --SELECT City_pair.outbound, City_pair.inbound, direct, one_con, two_con,
