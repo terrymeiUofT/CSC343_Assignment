@@ -91,7 +91,7 @@ CREATE VIEW City_pair AS
 SELECT C1.city, C2.city
 FROM Airport C1, Airport C2
 WHERE C1.city != C2.city AND C1.country = 'Canada' OR C1.country = 'USA'
-C2.country = 'Canada' OR C2.country = 'USA';
+AND C2.country = 'Canada' OR C2.country = 'USA';
 
 -- Your query that answers the question goes below the "insert into" line:
 --INSERT INTO q3
