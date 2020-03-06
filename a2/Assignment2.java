@@ -79,7 +79,7 @@ public class Assignment2 {
     */
    public boolean bookSeat(int passID, int flightID, String seatClass) {
       // Implement this method!
-      boolean check;
+      boolean check=True;
       boolean valid;
       int BookingID;
       Timestamp curtime;
