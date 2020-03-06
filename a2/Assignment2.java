@@ -329,7 +329,7 @@ public class Assignment2 {
             queryString += "VALUES( " + Integer.toString(id) + ", ";
             queryString += Integer.toString(pass_id) + ", ";
             queryString += Integer.toString(flight_id) + ", ";
-            queryString += "(?::timestamp(0)), "
+            queryString += "(?::timestamp(0)), ";
             //queryString += datetime.toString() + ", ";
             queryString += Integer.toString(price) + ", ";
             queryString += "'economy'" + ", ";
