@@ -352,12 +352,12 @@ public class Assignment2 {
       try {
         Assignment2 a2 = new Assignment2();
         a2.connectDB("jdbc:postgresql://localhost:5432/csc343h-meitian1", "meitian1", "");
-        a2.getBookingID();
-        a2.getPrice(flightID, seatClass);
-        a2.getSeatRow(flightID, seatClass);
-        a2.getSeatLetter(flightID, seatClass);
-        valid = a2.check_valid(flightID, seatClass);
-        System.out.println("valid: " + valid);
+        //a2.getBookingID();
+        //a2.getPrice(flightID, seatClass);
+        //a2.getSeatRow(flightID, seatClass);
+        //a2.getSeatLetter(flightID, seatClass);
+        //valid = a2.check_valid(flightID, seatClass);
+        //System.out.println("valid: " + valid);
         a2.bookSeat(100, flightID, seatClass);
         a2.disconnectDB();
       } catch (SQLException se) {
