@@ -91,7 +91,7 @@ public class Assignment2 {
       curtime = getCurrentTimeStamp();
       Price = getPrice(flightID, seatClass);
       SeatRow = getSeatRow(flightID, seatClass);
-      seatLetter = getSeatLetter(flightID, seatClass);
+      SeatLetter = getSeatLetter(flightID, seatClass);
 
       if (valid) {
         book_it(passID, flightID, curtime, Price, seatClass, SeatRow, SeatLetter);
