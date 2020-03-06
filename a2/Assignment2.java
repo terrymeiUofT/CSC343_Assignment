@@ -369,7 +369,7 @@ public class Assignment2 {
             pStatement = connection.prepareStatement(queryString);
             rs = pStatement.executeQuery();
             while (rs.next()) {
-                int bid = rs.getInt(id);
+                int bid = rs.getInt("id");
                 System.out.println("bid: " + bid);
             }
         } catch (SQLException se) {
