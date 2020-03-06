@@ -223,11 +223,11 @@ public class Assignment2 {
             letter = "F";
         }
         System.out.println("row is: " + row);
-        return row;
+        return letter;
       } catch (SQLException se) {
         System.err.println("SQL Exception." + "<Message>: " + se.getMessage());
       }
-      return -1;
+      return "";
 
    }
   /* ----------------------- Main method below  ------------------------- */
