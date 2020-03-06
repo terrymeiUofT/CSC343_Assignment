@@ -94,9 +94,9 @@ public class Assignment2 {
       SeatLetter = getSeatLetter(flightID, seatClass);
 
       if (valid) {
-        book_it(passID, flightID, curtime, Price, seatClass, SeatRow, SeatLetter);
+        book_it(BookingID, passID, flightID, curtime, Price, seatClass, SeatRow, SeatLetter);
       } else{
-        book_it(passID, flightID, curtime, Price, seatClass, null, null);
+        book_it(BookingID, passID, flightID, curtime, Price, seatClass, null, null);
       }
    }
 
