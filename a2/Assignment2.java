@@ -366,7 +366,7 @@ public class Assignment2 {
         a2.bookSeat(6, flightID, seatClass);
         try {
             queryString = "SELECT * FROM Booking;";
-            pStatement = connection.prepareStatement(queryString);
+            pStatement = a2.connection.prepareStatement(queryString);
             rs = pStatement.executeQuery();
             while (rs.next()) {
                 int bid = rs.getInt("id");
