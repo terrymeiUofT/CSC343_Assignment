@@ -39,7 +39,7 @@ public class Assignment2 {
       } catch (SQLException se) {
         return false;
       }
-      System.out.println("Connection established!");
+      //System.out.println("Connection established!");
       return true;
    }
 
@@ -56,7 +56,7 @@ public class Assignment2 {
         } catch (SQLException se) {
             return false;
         }
-        System.out.println("Connection disconnected!");
+        //System.out.println("Connection disconnected!");
         return true;
       }
       return false;
@@ -79,6 +79,9 @@ public class Assignment2 {
     */
    public boolean bookSeat(int passID, int flightID, String seatClass) {
       // Implement this method!
+
+
+
       return false;
    }
 
@@ -119,7 +122,24 @@ public class Assignment2 {
    }
 
    // Add more helper functions below if desired.
-
+   private int getBookingID() {
+      PreparedStatement pStatement;
+      ResultSet rs;
+      String queryString;
+      try {
+        queryString = "SELECT MAX(id) as max_id FROM Booking";
+        pStatement = connection.prepareStatement(queryString);
+        rs = pStatement.executeQuery();
+        while (rs.next()) {
+            int BookingID = rs.getInt(max_id) + 1;
+            System.out.println("New BookingID is: " + BookingID);
+        }
+        return BookingID;
+      } catch (SQLException se) {
+        System.err.println("SQL Exception." + "<Message>: " + se.getMessage());
+      }
+      return -1;
+   }
 
   
   /* ----------------------- Main method below  ------------------------- */
@@ -130,6 +150,7 @@ public class Assignment2 {
       try {
         Assignment2 a2 = new Assignment2();
         a2.connectDB("jdbc:postgresql://localhost:5432/csc343h-meitian1", "meitian1", "");
+        a2.getBookingID();
         a2.disconnectDB();
       } catch (SQLException se) {
         System.out.println("failed to establish connection in main");
