@@ -346,7 +346,7 @@ public class Assignment2 {
       int BookingID;
       int price;
       int flightID = 5;
-      String seatClass = "first";
+      String seatClass = "economy";
       boolean valid;
 
       try {
