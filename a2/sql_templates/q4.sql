@@ -36,7 +36,7 @@ ON Departed.plane = Plane.tail_number;
 
 DROP VIEW IF EXISTS Departed_booking CASCADE;
 CREATE VIEW Departed_booking AS
-SELECT flight.airline, plane, count.booked
+SELECT flight.id, flight.airline, plane, count.booked
 FROM flight, departure,
     (SELECT flight_id, count(*) booked
     FROM booking GROUP BY flight_id) count
