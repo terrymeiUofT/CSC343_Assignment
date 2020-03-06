@@ -149,7 +149,7 @@ public class Assignment2 {
       int price = -1;
 
       try {
-        queryString = "SELECT ? as ticket FROM Price WHERE flight_id = 1;";
+        queryString = "SELECT CONCAT(?::seatClass) as ticket FROM Price WHERE flight_id = 1;";
         pStatement = connection.prepareStatement(queryString);
         pStatement.setString(1, seatClass);
         //pStatement.setString(2, Integer.toString(flightID));
