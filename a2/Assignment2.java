@@ -142,6 +142,27 @@ public class Assignment2 {
       return -1;
    }
 
+   private int getPrice(int flightID, String seatClass) {
+      PreparedStatement pStatement;
+      ResultSet rs;
+      String queryString;
+      int price = -1;
+      try {
+        queryString = "SELECT ? as ticketprice FROM price, flight WHERE flight.id = price.id AND flight.id = ?";
+        pStatement = connection.prepareStatement(queryString);
+        pStatement.setString(1, flightID);
+        pStatement.setString(2, seatClass);
+        rs = pStatement.executeQuery();
+        while (rs.next()) {
+            price = rs.getInt("ticketprice");
+            System.out.println("Price is: " + price);
+        }
+        return price;
+      } catch (SQLException se) {
+        System.err.println("SQL Exception." + "<Message>: " + se.getMessage());
+      }
+      return -1;
+   }
   
   /* ----------------------- Main method below  ------------------------- */
 
@@ -152,6 +173,7 @@ public class Assignment2 {
         Assignment2 a2 = new Assignment2();
         a2.connectDB("jdbc:postgresql://localhost:5432/csc343h-meitian1", "meitian1", "");
         a2.getBookingID();
+        a2.getPrice(1, 'first');
         a2.disconnectDB();
       } catch (SQLException se) {
         System.out.println("failed to establish connection in main");
