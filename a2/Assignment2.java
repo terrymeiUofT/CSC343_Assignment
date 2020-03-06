@@ -310,7 +310,7 @@ public class Assignment2 {
       if ((seat_row != -1) & (seat_letter != "")){
             try {
             queryString = "INSERT INTO Booking ";
-            queryString += "VALUES( "+Integer.toString(id)+", ";
+            queryString += "VALUES( " + Integer.toString(id)+", ";
             queryString += Integer.toString(pass_id)+", ";
             queryString += Integer.toString(flight_id)+", ";
             queryString += datetime.toString() + ", ";
@@ -329,13 +329,11 @@ public class Assignment2 {
             queryString += "VALUES( " + Integer.toString(id) + ", ";
             queryString += Integer.toString(pass_id) + ", ";
             queryString += Integer.toString(flight_id) + ", ";
-            queryString += "(?::timestamp(0)), ";
-            //queryString += datetime.toString() + ", ";
+            queryString += datetime.toString() + ", ";
             queryString += Integer.toString(price) + ", ";
             queryString += "'economy'" + ", ";
-            queryString += "0, 'temp');";
+            queryString += "0, 'X');";
             pStatement = connection.prepareStatement(queryString);
-            pStatement.setString(1, datetime.toString());
             pStatement.executeUpdate();
           } catch (SQLException se) {
             System.err.println("SQL Exception. helo" + "<Message>: " + se.getMessage());
