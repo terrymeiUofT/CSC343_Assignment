@@ -209,19 +209,18 @@ public class Assignment2 {
         if (rs.next()) {
             max_letter = rs.getString("max_letter");
         }
-        if (max_letter == "F") {
+        if (max_letter.equals("F")) {
             letter = "A";
-        }
-        if (max_letter == "A") {
+        } else if (max_letter.equals("A")) {
             System.out.println("max_letter is: " + max_letter);
             letter = "B";
-        } else if (max_letter == "B") {
+        } else if (max_letter.equals("B")) {
             letter = "C";
-        } else if (max_letter == "C") {
+        } else if (max_letter.equals("C")) {
             letter = "D";
-        } else if (max_letter == "D") {
+        } else if (max_letter.equals("D")) {
             letter = "E";
-        } else if (max_letter == "E") {
+        } else if (max_letter.equals("E")) {
             letter = "F";
         }
         System.out.println("letter is: " + letter);
