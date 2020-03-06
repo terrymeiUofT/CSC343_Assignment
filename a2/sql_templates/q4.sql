@@ -21,9 +21,9 @@ CREATE TABLE q4 (
 -- Define views for your intermediate steps here:
 DROP VIEW IF EXISTS Departed_capacity CASCADE;
 CREATE VIEW Departed_capacity AS
-SELECT DISTINCT departed.airline, plane, (capacity_first + capacity_business + capacity_economy) as capacity
+SELECT departed.id, departed.airline, plane, (capacity_first + capacity_business + capacity_economy) as capacity
 FROM Plane LEFT JOIN
-    (SELECT flight.airline, plane
+    (SELECT flight.id, flight.airline, plane
     FROM flight LEFT JOIN departure
     ON flight.id = departure.flight_id) departed
 ON Departed.plane = Plane.tail_number;
@@ -69,19 +69,19 @@ ADD COLUMN high INT DEFAULT 0;
 DROP VIEW IF EXISTS Departed_result CASCADE;
 CREATE VIEW Departed_result AS
 SELECT airline, tail_number,
-    CASE WHEN percentage >= 0 AND percentage < 0.2 THEN very_low + 1
+    CASE WHEN percentage >= 0 AND percentage < 0.2 THEN 1
          ELSE 0 END
          AS very_low,
-    CASE WHEN percentage >= 0.2 AND percentage < 0.4 THEN low + 1
+    CASE WHEN percentage >= 0.2 AND percentage < 0.4 THEN 1
          ELSE 0 END
          AS low,
-    CASE WHEN percentage >= 0.4 AND percentage < 0.6 THEN fair + 1
+    CASE WHEN percentage >= 0.4 AND percentage < 0.6 THEN 1
          ELSE 0 END
          AS fair,
-    CASE WHEN percentage >= 0.6 AND percentage < 0.8 THEN normal+ 1
+    CASE WHEN percentage >= 0.6 AND percentage < 0.8 THEN 1
          ELSE 0 END
          AS normal,
-    CASE WHEN percentage >= 0.8 THEN high + 1
+    CASE WHEN percentage >= 0.8 THEN 1
          ELSE 0 END
          AS high
 FROM Departed_hist;
