@@ -90,7 +90,7 @@ CREATE VIEW Combined_info AS
 SELECT Dir.outbound, Dir.inbound, direct, one_con, two_con,
 Dir.earliest earliest_dir
 FROM Direct_flight_info Dir RIGHT JOIN City_pair
-WHERE Dir.outbound = City_pair.outbound AND Dir.inbound = City_pair.inbound;
+ON Dir.outbound = City_pair.outbound AND Dir.inbound = City_pair.inbound;
 
 
 
