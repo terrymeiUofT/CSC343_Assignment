@@ -56,7 +56,7 @@ public class Assignment2 {
    public boolean disconnectDB() {
       // Implement this method!
       try{
-        connection.close()
+        connection.close();
       } catch (SQLException se) {
         return false;
       }
