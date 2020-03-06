@@ -7,6 +7,9 @@ public class Assignment2 {
 
    // A connection to the database
    Connection connection;
+   PreparedStatement pStatement;
+   ResultSet rs;
+   String setpath_query;
 
    // Can use if you wish: seat letters
    List<String> seatLetters = Arrays.asList("A", "B", "C", "D", "E", "F");
@@ -33,10 +36,6 @@ public class Assignment2 {
    */
    public boolean connectDB(String URL, String username, String password) {
       // Implement this method!
-      PreparedStatement pStatement;
-      ResultSet rs;
-      String setpath_query;
-
       try {
         connection = DriverManager.getConnection(URL, username, password);
         setpath_query = "SET SEARCH_PATH to air_travel, public";
