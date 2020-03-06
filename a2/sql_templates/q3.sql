@@ -90,8 +90,8 @@ DROP VIEW IF EXISTS City_pair CASCADE;
 CREATE VIEW City_pair AS
 SELECT DISTINCT C1.city inbound, C2.city outbound
 FROM Airport C1, Airport C2
-WHERE C1.city != C2.city AND C1.country = 'Canada' OR C1.country = 'USA'
-AND C2.country = 'Canada' OR C2.country = 'USA';
+WHERE C1.city != C2.city AND (C1.country = 'Canada' OR C1.country = 'USA')
+AND (C2.country = 'Canada' OR C2.country = 'USA');
 
 -- Your query that answers the question goes below the "insert into" line:
 --INSERT INTO q3
