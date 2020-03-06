@@ -321,7 +321,7 @@ public class Assignment2 {
             pStatement = connection.prepareStatement(queryString);
             pStatement.executeUpdate();
           } catch (SQLException se) {
-            System.err.println("SQL Exception." + "<Message>: " + se.getMessage());
+            System.err.println("SQL Exception. halo" + "<Message>: " + se.getMessage());
           }
       } else{
            try {
@@ -336,7 +336,7 @@ public class Assignment2 {
             pStatement = connection.prepareStatement(queryString);
             pStatement.executeUpdate();
           } catch (SQLException se) {
-            System.err.println("SQL Exception." + "<Message>: " + se.getMessage());
+            System.err.println("SQL Exception. helo" + "<Message>: " + se.getMessage());
           }
       }
    }
