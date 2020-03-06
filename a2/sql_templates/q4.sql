@@ -54,5 +54,16 @@ SELECT * FROM Departed_percent;
 ALTER Table Departed_hist
 ADD COLUMN very_low INT DEFAULT 0;
 
+ALTER Table Departed_hist
+ADD COLUMN low INT DEFAULT 0;
+
+ALTER Table Departed_hist
+ADD COLUMN fair INT DEFAULT 0;
+
+ALTER Table Departed_hist
+ADD COLUMN normal INT DEFAULT 0;
+
+ALTER Table Departed_hist
+ADD COLUMN high INT DEFAULT 0;
 -- Your query that answers the question goes below the "insert into" line:
 --INSERT INTO q4
