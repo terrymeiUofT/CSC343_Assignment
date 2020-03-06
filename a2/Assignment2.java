@@ -312,8 +312,8 @@ public class Assignment2 {
             queryString = "INSERT INTO Booking ";
             queryString += "VALUES( " + Integer.toString(id)+", ";
             queryString += Integer.toString(pass_id)+", ";
-            queryString += Integer.toString(flight_id)+", ";
-            queryString += datetime.toString() + ", ";
+            queryString += Integer.toString(flight_id)+", '";
+            queryString += datetime.toString() + "', ";
             queryString += Integer.toString(price)+", ";
             queryString += seat_class + ", ";
             queryString += Integer.toString(seat_row)+", ";
