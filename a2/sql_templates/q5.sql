@@ -41,7 +41,7 @@ WITH RECURSIVE Flight_hopping AS (
     AND num_flights < (SELECT n FROM n))
 )
 
-SELECT * FROM Flight_hopping;
+SELECT node as destination, num_flights FROM Flight_hopping;
 
 
 
