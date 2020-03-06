@@ -95,7 +95,8 @@ AND (C2.country = 'Canada' OR C2.country = 'USA');
 
 -- Your query that answers the question goes below the "insert into" line:
 INSERT INTO q3
-SELECT DISTINCT City_pair.outbound, City_pair.inbound, direct, one_con, two_con, earliest
+SELECT City_pair.outbound, City_pair.inbound, direct, one_con, two_con,
+LEAST(earliest_dir, earliest_one, earliest_two) as earliest
 FROM City_pair LEFT JOIN Combined_info
 ON City_pair.outbound = Combined_info.outbound AND City_pair.inbound = Combined_info.inbound;
 
