@@ -7,9 +7,6 @@ public class Assignment2 {
 
    // A connection to the database
    Connection connection;
-   PreparedStatement pStatement;
-   ResultSet rs;
-   String setpath_query;
 
    // Can use if you wish: seat letters
    List<String> seatLetters = Arrays.asList("A", "B", "C", "D", "E", "F");
@@ -35,6 +32,9 @@ public class Assignment2 {
    * @return           true if connecting is successful, false otherwise
    */
    public boolean connectDB(String URL, String username, String password) {
+      PreparedStatement pStatement;
+      ResultSet rs;
+      String setpath_query;
       // Implement this method!
       try {
         connection = DriverManager.getConnection(URL, username, password);
@@ -129,7 +129,8 @@ public class Assignment2 {
    public static void main(String[] args) {
       // You can put testing code in here. It will not affect our autotester.
       System.out.println("Running the code!");
-      connectDB("jdbc:postgresql://localhost:5432/csc343h-meitian1", "meitian1", "");
+      Assignment2 a2 = new Assignment2();
+      a2.connectDB("jdbc:postgresql://localhost:5432/csc343h-meitian1", "meitian1", "");
    }
 
 }
