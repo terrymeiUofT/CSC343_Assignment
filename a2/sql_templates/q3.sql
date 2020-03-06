@@ -86,6 +86,7 @@ FROM Direct_flight_info Dir, Onecon_flight_info One, Twocon_flight_info Two
 WHERE Dir.outbound = One.outbound AND Dir.outbound = Two.outbound AND One.outbound = Two.outbound
 AND Dir.inbound = One.inbound AND Dir.inbound = Two.inbound AND One.inbound = Two.inbound;
 -- Your query that answers the question goes below the "insert into" line:
---INSERT INTO q3
-
+INSERT INTO q3
+SELECT outbound, inbound, direct, one_con, two_con, LEAST(earliest_dir, earliest_one, earliest_two) as earliest
+FROM Combined_info;
 
