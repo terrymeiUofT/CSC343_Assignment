@@ -149,13 +149,13 @@ public class Assignment2 {
       int price = -1;
 
       try {
-        queryString = "SELECT ? as ticketprice FROM Price WHERE flight_id=1";
+        queryString = "SELECT ? as ticket FROM Price WHERE flight_id=1";
         pStatement = connection.prepareStatement(queryString);
         pStatement.setString(1, seatClass);
         //pStatement.setString(2, Integer.toString(flightID));
         rs = pStatement.executeQuery();
         while (rs.next()) {
-            price = rs.getInt("ticketprice");
+            price = rs.getInt("ticket");
             System.out.println("Price is: " + price);
         }
         return price;
