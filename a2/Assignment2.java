@@ -172,7 +172,7 @@ public class Assignment2 {
       System.out.println("Running the code!");
       int BookingID;
       int price;
-      String seatClass = "first";
+      seat_class seatClass = "first";
       try {
         Assignment2 a2 = new Assignment2();
         a2.connectDB("jdbc:postgresql://localhost:5432/csc343h-meitian1", "meitian1", "");
