@@ -132,7 +132,7 @@ public class Assignment2 {
         pStatement = connection.prepareStatement(queryString);
         rs = pStatement.executeQuery();
         while (rs.next()) {
-            BookingID = rs.getInt(max_id) + 1;
+            BookingID = rs.getInt("max_id") + 1;
             System.out.println("New BookingID is: " + BookingID);
         }
         return BookingID;
