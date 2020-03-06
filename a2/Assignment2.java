@@ -171,7 +171,7 @@ public class Assignment2 {
       String max_letter = "";
 
       try {
-        queryString = "SELECT MAX(seat_row) as max_row, MAX(seat_letter) as max_letter ";
+        queryString = "SELECT MAX(row) as max_row, MAX(letter) as max_letter ";
         queryString += "FROM Booking WHERE seat_class = " + seatClass + ";";
         pStatement = connection.prepareStatement(queryString);
         rs = pStatement.executeQuery();
