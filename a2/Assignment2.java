@@ -95,10 +95,12 @@ public class Assignment2 {
 
       if (valid) {
         book_it(BookingID, passID, flightID, curtime, Price, seatClass, SeatRow, SeatLetter);
+        return true;
       } else{
         book_it(BookingID, passID, flightID, curtime, Price, seatClass, -1, "");
+        return true;
       }
-      return
+      return false;
    }
 
    /**
