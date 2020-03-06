@@ -38,9 +38,9 @@ public class Assignment2 {
       // Implement this method!
       try {
         connection = DriverManager.getConnection(URL, username, password);
-        setpath_query = "SET SEARCH_PATH to air_travel, public";
-        pStatement = connection.prepareStatement(setpath_query);
-        rs = pStatement.executeQuery();
+        //setpath_query = "SET SEARCH_PATH to air_travel, public";
+        //pStatement = connection.prepareStatement(setpath_query);
+        //rs = pStatement.executeQuery();
       } catch (SQLException se) {
         System.out.println("Connection failed!");
         return false;
