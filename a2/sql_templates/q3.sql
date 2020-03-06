@@ -88,14 +88,14 @@ AND Dir.inbound = One.inbound AND Dir.inbound = Two.inbound AND One.inbound = Tw
 
 DROP VIEW IF EXISTS City_pair CASCADE;
 CREATE VIEW City_pair AS
-SELECT DISTINCT C1.city inbound, C2.city outbound
+SELECT DISTINCT C1.city outbound, C2.city inbound
 FROM Airport C1, Airport C2
 WHERE C1.city != C2.city AND (C1.country = 'Canada' OR C1.country = 'USA')
 AND (C2.country = 'Canada' OR C2.country = 'USA');
 
 -- Your query that answers the question goes below the "insert into" line:
---INSERT INTO q3
---SELECT DISTINCT outbound, city inbound, direct, one_con, two_con, earliest
---FROM Join_name RIGHT JOIN airport
---ON inbound = city;
+INSERT INTO q3
+SELECT DISTINCT City_pair.outbound, City_pair.inbound, direct, one_con, two_con, earliest
+FROM City_pair LEFT JOIN Combined_info
+ON City_pair.outbound = Combined_info.outbound AND City_pair.inbound = Combined_info.inbound;
 
