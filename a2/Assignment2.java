@@ -331,7 +331,7 @@ public class Assignment2 {
             queryString += Integer.toString(flight_id) + ", ";
             queryString += datetime.toString() + ", ";
             queryString += Integer.toString(price) + ", ";
-            queryString += "'economy'" + ", ";
+            queryString += "'economy" + ", ";
             queryString += "0, 'X');";
             pStatement = connection.prepareStatement(queryString);
             pStatement.executeUpdate();
