@@ -104,10 +104,10 @@ SELECT Combined_info2.outbound, Combined_info2.inbound, direct, one_con, two_con
 earliest_dir, earliest_one, Two.earliest earliest_two
 FROM Combined_info2 LEFT JOIN Twocon_flight_info Two
 ON Two.outbound = Combined_info2.outbound AND Two.inbound = Combined_info2.inbound;
+
 -- Your query that answers the question goes below the "insert into" line:
---INSERT INTO q3
---SELECT City_pair.outbound, City_pair.inbound, direct, one_con, two_con,
---LEAST(earliest_dir, earliest_one, earliest_two) as earliest
---FROM City_pair LEFT JOIN Combined_info
---ON City_pair.outbound = Combined_info.outbound AND City_pair.inbound = Combined_info.inbound;
+INSERT INTO q3
+SELECT outbound, inbound, direct, one_con, two_con,
+LEAST(earliest_dir, earliest_one, earliest_two) as earliest
+FROM Combined_info3;
 
