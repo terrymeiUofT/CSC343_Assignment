@@ -263,6 +263,9 @@ public class Assignment2 {
         System.err.println("SQL Exception." + "<Message>: " + se.getMessage());
       }
 
+      System.out.println("booked is: " + booked);
+      System.out.println("class_cap is: " + class_cap);
+
       if (booked > class_cap) {
         if (seatClass.equals("economy")) {
             if (booked - class_cap < 10){
