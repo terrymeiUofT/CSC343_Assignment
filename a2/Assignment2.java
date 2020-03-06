@@ -79,7 +79,6 @@ public class Assignment2 {
     */
    public boolean bookSeat(int passID, int flightID, String seatClass) {
       // Implement this method!
-      getPrice(flightID, seatClass);
 
 
       return false;
@@ -171,12 +170,13 @@ public class Assignment2 {
       System.out.println("Running the code!");
       int BookingID;
       int price;
+      int flightID = 1;
       String seatClass = "first";
       try {
         Assignment2 a2 = new Assignment2();
         a2.connectDB("jdbc:postgresql://localhost:5432/csc343h-meitian1", "meitian1", "");
-        BookingID = a2.getBookingID();
-        a2.bookSeat(1, 1, seatClass);
+        a2.getBookingID();
+        a2.getPrice(flightID, seatClass);
         a2.disconnectDB();
       } catch (SQLException se) {
         System.out.println("failed to establish connection in main");
