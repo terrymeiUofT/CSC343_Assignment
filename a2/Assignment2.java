@@ -330,8 +330,8 @@ public class Assignment2 {
             queryString += Integer.toString(pass_id) + ", ";
             queryString += Integer.toString(flight_id) + ", ";
             queryString += datetime.toString() + ", ";
-            queryString += Integer.toString(price) + ", '";
-            queryString += seat_class + "', ";
+            queryString += Integer.toString(price) + ", ";
+            queryString += "'economy'" + ", ";
             queryString += "0, 'temp');";
             pStatement = connection.prepareStatement(queryString);
             pStatement.executeUpdate();
