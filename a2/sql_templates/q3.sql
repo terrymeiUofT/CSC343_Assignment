@@ -78,14 +78,6 @@ SELECT out_city outbound, dest_city inbound, count(*) two_con, MIN(s_arv) earlie
 FROM Twocon_flight
 GROUP BY out_city, dest_city;
 
-DROP VIEW IF EXISTS Combined_info CASCADE;
-CREATE VIEW Combined_info AS
-SELECT Dir.outbound, Dir.inbound, direct, one_con, two_con,
-Dir.earliest earliest_dir, One.earliest earliest_one, Two.earliest earliest_two
-FROM Direct_flight_info Dir, Onecon_flight_info One, Twocon_flight_info Two
-WHERE Dir.outbound = One.outbound AND Dir.outbound = Two.outbound AND One.outbound = Two.outbound
-AND Dir.inbound = One.inbound AND Dir.inbound = Two.inbound AND One.inbound = Two.inbound;
-
 DROP VIEW IF EXISTS City_pair CASCADE;
 CREATE VIEW City_pair AS
 SELECT DISTINCT C1.city outbound, C2.city inbound
@@ -93,10 +85,19 @@ FROM Airport C1, Airport C2
 WHERE C1.city != C2.city AND (C1.country = 'Canada' OR C1.country = 'USA')
 AND (C2.country = 'Canada' OR C2.country = 'USA');
 
+DROP VIEW IF EXISTS Combined_info CASCADE;
+CREATE VIEW Combined_info AS
+SELECT Dir.outbound, Dir.inbound, direct, one_con, two_con,
+Dir.earliest earliest_dir
+FROM Direct_flight_info Dir RIGHT JOIN City_pair
+WHERE Dir.outbound = City_pair.outbound AND Dir.inbound = City_pair.inbound;
+
+
+
 -- Your query that answers the question goes below the "insert into" line:
-INSERT INTO q3
-SELECT City_pair.outbound, City_pair.inbound, direct, one_con, two_con,
-LEAST(earliest_dir, earliest_one, earliest_two) as earliest
-FROM City_pair LEFT JOIN Combined_info
-ON City_pair.outbound = Combined_info.outbound AND City_pair.inbound = Combined_info.inbound;
+--INSERT INTO q3
+--SELECT City_pair.outbound, City_pair.inbound, direct, one_con, two_con,
+--LEAST(earliest_dir, earliest_one, earliest_two) as earliest
+--FROM City_pair LEFT JOIN Combined_info
+--ON City_pair.outbound = Combined_info.outbound AND City_pair.inbound = Combined_info.inbound;
 
