@@ -332,11 +332,10 @@ public class Assignment2 {
             queryString += datetime.toString() + ", ";
             queryString += Integer.toString(price) + ", ";
             queryString += seat_class + ", ";
-            queryString += "NULL, NULL);";
+            queryString += "0, 'temp');";
             pStatement = connection.prepareStatement(queryString);
             pStatement.executeUpdate();
           } catch (SQLException se) {
-            System.out.println(queryString);
             System.err.println("SQL Exception. helo" + "<Message>: " + se.getMessage());
           }
       }
