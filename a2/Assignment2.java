@@ -79,7 +79,7 @@ public class Assignment2 {
     */
    public boolean bookSeat(int passID, int flightID, String seatClass) {
       // Implement this method!
-      price = getPrice(flightID, seatClass);
+      getPrice(flightID, seatClass);
 
 
       return false;
