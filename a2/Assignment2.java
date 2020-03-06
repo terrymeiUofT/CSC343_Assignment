@@ -305,7 +305,7 @@ public class Assignment2 {
         queryString += "SELECT "+Integer.toString(id)+", ";
         queryString += Integer.toString(pass_id)+", ";
         queryString += Integer.toString(flight_id)+", ";
-        queryString += Integer.toString(datetime)+", ";
+        queryString += Timestamp.toString(datetime)+", ";
         queryString += Integer.toString(price)+", ";
         queryString += seat_class + ", ";
         queryString += Integer.toString(seat_row)+", ";
