@@ -154,7 +154,7 @@ public class Assignment2 {
         pStatement.setString(1, seatClass);
         pStatement.setString(2, Integer.toString(flightID));
         rs = pStatement.executeQuery();
-        while (rs.next()) {
+        if (rs.next()) {
             price = rs.getInt("ticket");
             System.out.println("Price is: " + price);
         }
