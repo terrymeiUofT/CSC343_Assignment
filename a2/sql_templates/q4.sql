@@ -69,7 +69,19 @@ ADD COLUMN high INT DEFAULT 0;
 SELECT airline, tail_number,
     CASE WHEN percentage >= 0 AND percentage < 20 THEN 1
          ELSE 0 END
-         AS very_low
+         AS very_low,
+    CASE WHEN percentage >= 20 AND percentage < 40 THEN 1
+         ELSE 0 END
+         AS low,
+    CASE WHEN percentage >= 40 AND percentage < 60 THEN 1
+         ELSE 0 END
+         AS fair,
+    CASE WHEN percentage >= 60 AND percentage < 80 THEN 1
+         ELSE 0 END
+         AS normal,
+    CASE WHEN percentage >= 80 THEN 1
+         ELSE 0 END
+         AS high
 FROM Departed_hist;
 -- Your query that answers the question goes below the "insert into" line:
 --INSERT INTO q4
