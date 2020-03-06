@@ -264,7 +264,7 @@ public class Assignment2 {
       }
 
       if (booked > class_cap) {
-        if (seatClass.equals("economy") {
+        if (seatClass.equals("economy")) {
             if (booked - class_cap < 10){
                 return true;
             } else {
