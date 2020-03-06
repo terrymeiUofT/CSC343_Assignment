@@ -179,7 +179,7 @@ public class Assignment2 {
             max_row = rs.getInt("max_row");
             max_letter = rs.getString("max_letter");
         }
-        if max_letter == "F" {
+        if (max_letter == "F") {
             row = max_row + 1;
         } else {
             row = max_row;
@@ -205,6 +205,7 @@ public class Assignment2 {
         a2.connectDB("jdbc:postgresql://localhost:5432/csc343h-meitian1", "meitian1", "");
         a2.getBookingID();
         a2.getPrice(flightID, seatClass);
+        a2.getSeatRow(flightID, seatClass);
         a2.disconnectDB();
       } catch (SQLException se) {
         System.out.println("failed to establish connection in main");
