@@ -87,4 +87,7 @@ SELECT id, airline, tail_number,
          AS high
 FROM Departed_hist;
 -- Your query that answers the question goes below the "insert into" line:
---INSERT INTO q4
+INSERT INTO q4
+SELECT airline, tail_number, SUM(very_low) as very_low, SUM(low) as low, SUM(fair) as fair,
+SUM(normal) as normal, SUM(high) as high
+FROM Departed_hist GROUP BY airline, tail_number;
