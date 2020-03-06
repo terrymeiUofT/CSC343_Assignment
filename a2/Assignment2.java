@@ -50,12 +50,15 @@ public class Assignment2 {
    */
    public boolean disconnectDB() {
       // Implement this method!
-      try{
-        connection.close();
-      } catch (SQLException se) {
-        return false;
+      if (connection != null){
+        try{
+            connection.close();
+        } catch (SQLException se) {
+            return false;
+        }
+        return true;
       }
-      return true;
+      return false;
    }
    
    /* ======================= Airline-related methods ======================= */
