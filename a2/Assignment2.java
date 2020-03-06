@@ -148,7 +148,7 @@ public class Assignment2 {
       String queryString;
       int price = -1;
       try {
-        queryString = "SELECT ? as ticketprice FROM Price WHERE id = ?";
+        queryString = "SELECT ? as ticketprice FROM Price WHERE flight_id = ?";
         pStatement = connection.prepareStatement(queryString);
         pStatement.setString(1, seatClass);
         pStatement.setString(2, Integer.toString(flightID));
