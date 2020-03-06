@@ -350,6 +350,9 @@ public class Assignment2 {
       int flightID = 5;
       String seatClass = "economy";
       boolean valid;
+      PreparedStatement pStatement;
+      ResultSet rs;
+      String queryString;
 
       try {
         Assignment2 a2 = new Assignment2();
