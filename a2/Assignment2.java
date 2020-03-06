@@ -128,7 +128,7 @@ public class Assignment2 {
    public static void main(String[] args) {
       // You can put testing code in here. It will not affect our autotester.
       System.out.println("Running the code!");
-      connectDB("jdbc:postgresql://localhost:5432/csc343h-meitian1", "meitian1", "")
+      connectDB("jdbc:postgresql://localhost:5432/csc343h-meitian1", "meitian1", "");
    }
 
 }
