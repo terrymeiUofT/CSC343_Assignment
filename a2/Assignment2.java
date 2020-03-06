@@ -301,7 +301,7 @@ public class Assignment2 {
       String queryString;
 
        try {
-        queryString = "INSERT INTO Booking "
+        queryString = "INSERT INTO Booking ";
         queryString += "SELECT "+Integer.toString(id)+", ";
         queryString += Integer.toString(pass_id)+", ";
         queryString += Integer.toString(flight_id)+", ";
