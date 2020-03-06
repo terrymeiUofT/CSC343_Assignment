@@ -79,7 +79,7 @@ public class Assignment2 {
     */
    public boolean bookSeat(int passID, int flightID, String seatClass) {
       // Implement this method!
-      boolean check=True;
+      boolean check;
       boolean valid;
       int BookingID;
       Timestamp curtime;
@@ -88,6 +88,7 @@ public class Assignment2 {
       String SeatLetter;
 
       valid = check_valid(flightID, seatClass);
+      check = true;
       BookingID = getBookingID();
       curtime = getCurrentTimeStamp();
       Price = getPrice(flightID, seatClass);
