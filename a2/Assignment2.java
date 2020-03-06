@@ -96,7 +96,7 @@ public class Assignment2 {
       if (valid) {
         book_it(passID, flightID, curtime, Price, seatClass, SeatRow, SeatLetter);
       } else{
-        book_it(passID, flightID, curtime, Price, seatClass, null, null)
+        book_it(passID, flightID, curtime, Price, seatClass, null, null);
       }
    }
 
