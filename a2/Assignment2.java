@@ -171,9 +171,10 @@ public class Assignment2 {
       String max_letter = "";
 
       try {
-        queryString = "SELECT MAX(row) as max_row, MAX(letter) as max_letter ";
-        queryString += "FROM Booking WHERE flight_id = " + Integer.toString(flightID);
-        queryString += " AND seat_class = economy;";
+        //queryString = "SELECT MAX(row) as max_row, MAX(letter) as max_letter ";
+        //queryString += "FROM Booking WHERE flight_id = " + Integer.toString(flightID);
+        //queryString += " AND seat_class = economy;";
+        queryString = "SELECT MAX(row) as max_row, MAX(letter) as max_letter FROM Booking WHERE flight_id = 5 AND seat_class = economy;";
          //+ seatClass + ";";
         pStatement = connection.prepareStatement(queryString);
         rs = pStatement.executeQuery();
