@@ -43,8 +43,10 @@ public class Assignment2 {
         pStatement = connection.prepareStatement(setpath_query);
         rs = pStatement.executeQuery();
       } catch (SQLException se) {
+        System.out.println("Connection failed!");
         return false;
       }
+      System.out.println("Connection established!");
       return true;
    }
 
