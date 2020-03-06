@@ -96,7 +96,7 @@ public class Assignment2 {
       if (valid) {
         book_it(BookingID, passID, flightID, curtime, Price, seatClass, SeatRow, SeatLetter);
       } else{
-        book_it(BookingID, passID, flightID, curtime, Price, seatClass, null, null);
+        book_it(BookingID, passID, flightID, curtime, Price, seatClass, -1, "");
       }
    }
 
@@ -299,20 +299,35 @@ public class Assignment2 {
       PreparedStatement pStatement;
       ResultSet rs;
       String queryString;
-
-       try {
-        queryString = "INSERT INTO Booking ";
-        queryString += "SELECT "+Integer.toString(id)+", ";
-        queryString += Integer.toString(pass_id)+", ";
-        queryString += Integer.toString(flight_id)+", ";
-        queryString += datetime.toString() + ", ";
-        queryString += Integer.toString(price)+", ";
-        queryString += seat_class + ", ";
-        queryString += Integer.toString(seat_row)+", ";
-        queryString += seat_letter + ";";
-        pStatement = connection.prepareStatement(queryString);
-      } catch (SQLException se) {
-        System.err.println("SQL Exception." + "<Message>: " + se.getMessage());
+      if ((seat_row != -1) & (seat_letter != "")){
+            try {
+            queryString = "INSERT INTO Booking ";
+            queryString += "SELECT "+Integer.toString(id)+", ";
+            queryString += Integer.toString(pass_id)+", ";
+            queryString += Integer.toString(flight_id)+", ";
+            queryString += datetime.toString() + ", ";
+            queryString += Integer.toString(price)+", ";
+            queryString += seat_class + ", ";
+            queryString += Integer.toString(seat_row)+", ";
+            queryString += seat_letter + ";";
+            pStatement = connection.prepareStatement(queryString);
+          } catch (SQLException se) {
+            System.err.println("SQL Exception." + "<Message>: " + se.getMessage());
+          }
+      } else{
+           try {
+            queryString = "INSERT INTO Booking ";
+            queryString += "SELECT "+Integer.toString(id)+", ";
+            queryString += Integer.toString(pass_id)+", ";
+            queryString += Integer.toString(flight_id)+", ";
+            queryString += datetime.toString() + ", ";
+            queryString += Integer.toString(price)+", ";
+            queryString += seat_class + ", ";
+            queryString += "NULL, NULL;";
+            pStatement = connection.prepareStatement(queryString);
+          } catch (SQLException se) {
+            System.err.println("SQL Exception." + "<Message>: " + se.getMessage());
+          }
       }
    }
   /* ----------------------- Main method below  ------------------------- */
