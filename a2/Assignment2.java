@@ -79,10 +79,25 @@ public class Assignment2 {
     */
    public boolean bookSeat(int passID, int flightID, String seatClass) {
       // Implement this method!
+      boolean valid;
+      int BookingID;
+      timestamp curtime;
+      int Price;
+      int SeatRow;
+      String SeatLetter;
 
+      valid = check_valid(flightID, seatClass);
+      BookingID = getBookingID();
+      curtime = getCurrentTimeStamp();
+      Price = getPrice(flightID, seatClass);
+      SeatRow = getSeatRow(flightID, seatClass);
+      seatLetter = getSeatLetter(flightID, seatClass);
 
-
-      return false;
+      if (valid) {
+        book_it(passID, flightID, curtime, Price, seatClass, SeatRow, SeatLetter);
+      } else{
+        book_it(passID, flightID, curtime, Price, seatClass, null, null)
+      }
    }
 
    /**
@@ -279,6 +294,27 @@ public class Assignment2 {
       }
       return false;
    }
+
+   private void book_it(int id, int pass_id, int flight_id, timestamp datetime, int price, String seat_class, int seat_row, String seat_letter) {
+      PreparedStatement pStatement;
+      ResultSet rs;
+      String queryString;
+
+       try {
+        queryString = "INSERT INTO Booking "
+        queryString += "SELECT "+Integer.toString(id)+", ";
+        queryString += Integer.toString(pass_id)+", ";
+        queryString += Integer.toString(flight_id)+", ";
+        queryString += Integer.toString(datetime)+", ";
+        queryString += Integer.toString(price)+", ";
+        queryString += Integer.toString(seatClass)+", ";
+        queryString += Integer.toString(seat_row)+", ";
+        queryString += Integer.toString(seat_letter)+";";
+        pStatement = connection.prepareStatement(queryString);
+      } catch (SQLException se) {
+        System.err.println("SQL Exception." + "<Message>: " + se.getMessage());
+      }
+   }
   /* ----------------------- Main method below  ------------------------- */
 
    public static void main(String[] args) {
@@ -299,6 +335,7 @@ public class Assignment2 {
         a2.getSeatLetter(flightID, seatClass);
         valid = a2.check_valid(flightID, seatClass);
         System.out.println("valid: " + valid);
+        a2.bookSeat(100, flightID, seatClass);
         a2.disconnectDB();
       } catch (SQLException se) {
         System.out.println("failed to establish connection in main");
