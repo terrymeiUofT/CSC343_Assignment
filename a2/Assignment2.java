@@ -94,13 +94,20 @@ public class Assignment2 {
       SeatLetter = getSeatLetter(flightID, seatClass);
 
       if (valid) {
-        book_it(BookingID, passID, flightID, curtime, Price, seatClass, SeatRow, SeatLetter);
-        return true;
+        try{
+            book_it(BookingID, passID, flightID, curtime, Price, seatClass, SeatRow, SeatLetter);
+            return true;
+        } catch (SQLException se) {
+            return false;
+        }
       } else{
-        book_it(BookingID, passID, flightID, curtime, Price, seatClass, -1, "");
-        return true;
+        try{
+            book_it(BookingID, passID, flightID, curtime, Price, seatClass, -1, "");
+            return true;
+        } catch (SQLException se) {
+            return false;
+        }
       }
-      return false;
    }
 
    /**
