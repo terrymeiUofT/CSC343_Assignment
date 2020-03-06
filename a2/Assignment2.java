@@ -360,7 +360,7 @@ public class Assignment2 {
         //a2.getSeatLetter(flightID, seatClass);
         //valid = a2.check_valid(flightID, seatClass);
         //System.out.println("valid: " + valid);
-        a2.bookSeat(100, flightID, seatClass);
+        a2.bookSeat(6, flightID, seatClass);
         a2.disconnectDB();
       } catch (SQLException se) {
         System.out.println("failed to establish connection in main");
