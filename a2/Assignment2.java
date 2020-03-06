@@ -222,7 +222,7 @@ public class Assignment2 {
         } else if (max_letter == "E") {
             letter = "F";
         }
-        System.out.println("letter is: " + letter);
+        System.out.println("letter is: " + max_letter);
         return letter;
       } catch (SQLException se) {
         System.err.println("SQL Exception." + "<Message>: " + se.getMessage());
