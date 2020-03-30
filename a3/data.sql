@@ -124,10 +124,10 @@ VALUES
     (4, 1, 1, 1, '2019-07-22 20:30:00', 1, 'cave', 0, 0, 0, 0),
     (5, 5, 1, 2, '2019-07-22 12:30:00', 7, 'open', 0, 0, 0, 0),
     (6, 5, 3, 1, '2019-07-23 09:30:00', 1, 'cave', 0, 0, 0, 0),
-    (6, 5, 3, 1, '2019-07-24 09:30:00', 1, 'cave', 0, 0, 0, 0);
+    (7, 5, 3, 1, '2019-07-24 09:30:00', 1, 'cave', 0, 0, 0, 0);
 
 INSERT INTO
-Lead (leadid, bookingid, cardnumber, expirymonth, expiryday, cvv)
+Lead (bookingid, leadid, cardnumber, expirymonth, expiryday, cvv)
 VALUES
     (1, 1, '1234567812345678', 01, 01, 123),
     (2, 1, '1234567812345678', 01, 01, 123),
