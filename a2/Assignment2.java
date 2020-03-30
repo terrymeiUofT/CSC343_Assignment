@@ -156,7 +156,7 @@ public class Assignment2 {
         rs = pStatement.executeQuery();
         while (rs.next()) {
             BookingID = rs.getInt("max_id") + 1;
-            System.out.println("New BookingID is: " + BookingID);
+            //System.out.println("New BookingID is: " + BookingID);
         }
         return BookingID;
       } catch (SQLException se) {
@@ -177,7 +177,7 @@ public class Assignment2 {
         rs = pStatement.executeQuery();
         if (rs.next()) {
             price = rs.getInt("ticket");
-            System.out.println("Price is: " + price);
+            //System.out.println("Price is: " + price);
         }
         return price;
       } catch (SQLException se) {
@@ -209,7 +209,7 @@ public class Assignment2 {
         } else {
             row = max_row;
         }
-        System.out.println("row is: " + row);
+        //System.out.println("row is: " + row);
         return row;
       } catch (SQLException se) {
         System.err.println("SQL Exception." + "<Message>: " + se.getMessage());
@@ -246,7 +246,7 @@ public class Assignment2 {
         } else if (max_letter.equals("E")) {
             letter = "F";
         }
-        System.out.println("letter is: " + letter);
+        //System.out.println("letter is: " + letter);
         return letter;
       } catch (SQLException se) {
         System.err.println("SQL Exception." + "<Message>: " + se.getMessage());
@@ -286,8 +286,8 @@ public class Assignment2 {
         System.err.println("SQL Exception." + "<Message>: " + se.getMessage());
       }
 
-      System.out.println("booked is: " + booked);
-      System.out.println("class_cap is: " + class_cap);
+      //System.out.println("booked is: " + booked);
+      //System.out.println("class_cap is: " + class_cap);
 
       if (booked > class_cap) {
         if (seatClass.equals("economy")) {
