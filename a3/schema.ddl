@@ -61,7 +61,7 @@ CREATE TABLE Monitor (
 
 -- A shift table for monitors.
 CREATE TABLE Shift (
-  monid INT KEY REFERENCES Monitor,
+  monid INT PRIMARY KEY REFERENCES Monitor,
   -- the timestamp of last two shifts
   secondlast timestamp,
   lastshift timestamp
@@ -113,7 +113,7 @@ CREATE TABLE SiteDeepPrice (
 );
 
 CREATE TABLE SiteExtraPrice (
-  siteid INT PRIMARY EKY REFERENCES Site,
+  siteid INT PRIMARY KEY REFERENCES Site,
   -- The price for additional rental items.
   -- The value is NULL if such an item is not provided at a site.
   mask DECIMAL,
