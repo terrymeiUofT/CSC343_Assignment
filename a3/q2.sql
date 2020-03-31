@@ -42,9 +42,10 @@ SELECT siteid, monid, site_avg, mon_avg FROM
         UNION
         (SELECT siteid, monid FROM MonitorDeepFee)) pair
     JOIN
-        SiteAvgRating) pair1
+        SiteAvgRating) temp
 JOIN
-    MonAvgRating;
+    MonAvgRating
+ON temp.monid = MonAvgRating.monid;
 
 
 -- for each monitor-site pair, calculate its average rating
