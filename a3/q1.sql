@@ -43,4 +43,9 @@ LIMIT 1;
 
 
 -- Your query that answers the question goes below the "insert into" line:
--- INSERT INTO q1
+INSERT INTO q1
+(SELECT * FROM OpenSite)
+UNION
+(SELECT * FROM CaveSite)
+UNION
+(SELECT * FROM DeepSite);
