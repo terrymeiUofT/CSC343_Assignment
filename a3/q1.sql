@@ -13,11 +13,12 @@ CREATE TABLE q1 (
 -- Define views for your intermediate steps here:
 DROP VIEW IF EXISTS OpenSite CASCADE;
 CREATE VIEW OpenSite AS
-(SELECT 'open' as divetype, count(*) num_site FROM Site
-WHERE (max_daywater <> 0) OR (max_nightwater <> 0))
-JOIN
-(SELECT 'open' as divetype, firstname as monitor FROM Monitor
-WHERE watersize <> 0);
+SELECT * FROM
+    (SELECT 'open' as divetype, count(*) num_site FROM Site
+    WHERE (max_daywater <> 0) OR (max_nightwater <> 0)) SiteCount
+CROSS JOIN
+    (SELECT 'open' as divetype, firstname as monitor FROM Monitor
+    WHERE watersize <> 0) OpenMonitor;
 
 
 
