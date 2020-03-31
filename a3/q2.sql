@@ -14,12 +14,17 @@ CREATE TABLE q2 (
 -- Define views for your intermediate steps here:
 DROP VIEW IF EXISTS MonRating CASCADE;
 CREATE VIEW MonRating AS
-SELECT monid, siteid, avg(monrating) FROM
+SELECT monid, siteid, avg(monrating) avgrating FROM
     (SELECT monid, siteid, monrating FROM
     Booking JOIN PastSession
     ON Booking.id = PastSession.id) info
 GROUP BY monid, siteid;
 
+DROP VIEW IF EXISTS BestMonitors CASCADE;
+CREATE VIEW BestMonitors AS
+SELECT siteid, max(avgrating)
+FROM MonRating
+GROUP BY siteid;
 
 -- Your query that answers the question goes below the "insert into" line:
 -- INSERT INTO q2
