@@ -17,7 +17,7 @@ SELECT * FROM
     (SELECT 'open' as divetype, count(*) num_site FROM Site
     WHERE (max_daywater <> 0) OR (max_nightwater <> 0)) SiteCount
 CROSS JOIN
-    (SELECT 'open' as divetype, firstname as monitor FROM Monitor
+    (SELECT firstname as monitor FROM Monitor
     WHERE watersize <> 0) OpenMonitor;
 
 
