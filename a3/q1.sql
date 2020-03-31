@@ -18,7 +18,7 @@ SELECT * FROM
     WHERE (max_daywater <> 0) OR (max_nightwater <> 0)) SiteCount
 CROSS JOIN
     (SELECT firstname as monitor FROM Monitor
-    WHERE watersize <> 0 ORDER BY watersize) OpenMonitor
+    WHERE watersize <> 0 ORDER BY watersize DESC) OpenMonitor
 LIMIT 1;
 
 DROP VIEW IF EXISTS CaveSite CASCADE;
@@ -28,7 +28,7 @@ SELECT * FROM
     WHERE (max_daycave <> 0) OR (max_nightcave <> 0)) SiteCount
 CROSS JOIN
     (SELECT firstname as monitor FROM Monitor
-    WHERE cavesize <> 0 ORDER BY cavesize) CaveMonitor
+    WHERE cavesize <> 0 ORDER BY cavesize DESC) CaveMonitor
 LIMIT 1;
 
 DROP VIEW IF EXISTS DeepSite CASCADE;
@@ -38,7 +38,7 @@ SELECT * FROM
     WHERE (max_daydeep <> 0) OR (max_nightdeep <> 0)) SiteCount
 CROSS JOIN
     (SELECT firstname as monitor FROM Monitor
-    WHERE deepsize <> 0 ORDER BY deepsize) DeepMonitor
+    WHERE deepsize <> 0 ORDER BY deepsize DESC) DeepMonitor
 LIMIT 1;
 
 
