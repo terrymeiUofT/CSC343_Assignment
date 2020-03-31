@@ -18,9 +18,28 @@ SELECT * FROM
     WHERE (max_daywater <> 0) OR (max_nightwater <> 0)) SiteCount
 CROSS JOIN
     (SELECT firstname as monitor FROM Monitor
-    WHERE watersize <> 0) OpenMonitor
+    WHERE watersize <> 0 ORDER BY watersize) OpenMonitor
 LIMIT 1;
 
+DROP VIEW IF EXISTS CaveSite CASCADE;
+CREATE VIEW CaveSite AS
+SELECT * FROM
+    (SELECT 'cave' as divetype, count(*) num_site FROM Site
+    WHERE (max_daycave <> 0) OR (max_nightcave <> 0)) SiteCount
+CROSS JOIN
+    (SELECT firstname as monitor FROM Monitor
+    WHERE cavesize <> 0 ORDER BY cavesize) CaveMonitor
+LIMIT 1;
+
+DROP VIEW IF EXISTS DeepSite CASCADE;
+CREATE VIEW DeepSite AS
+SELECT * FROM
+    (SELECT 'deep' as divetype, count(*) num_site FROM Site
+    WHERE (max_daydeep <> 0) OR (max_nightdeep <> 0)) SiteCount
+CROSS JOIN
+    (SELECT firstname as monitor FROM Monitor
+    WHERE deepsize <> 0 ORDER BY deepsize) DeepMonitor
+LIMIT 1;
 
 
 -- Your query that answers the question goes below the "insert into" line:
