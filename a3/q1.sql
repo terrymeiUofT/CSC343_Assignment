@@ -14,7 +14,7 @@ CREATE TABLE q1 (
 DROP VIEW IF EXISTS OpenSite CASCADE;
 CREATE VIEW OpenSite AS
 SELECT * FROM
-    (SELECT 'open' as divetype, count(*) num_site FROM Site
+    (SELECT CAST('open' AS dive_type) as divetype, count(*) num_site FROM Site
     WHERE (max_daywater <> 0) OR (max_nightwater <> 0)) SiteCount
 CROSS JOIN
     (SELECT firstname as monitor FROM Monitor
@@ -24,7 +24,7 @@ LIMIT 1;
 DROP VIEW IF EXISTS CaveSite CASCADE;
 CREATE VIEW CaveSite AS
 SELECT * FROM
-    (SELECT 'cave' as divetype, count(*) num_site FROM Site
+    (SELECT CAST('cave' AS dive_type) as divetype, count(*) num_site FROM Site
     WHERE (max_daycave <> 0) OR (max_nightcave <> 0)) SiteCount
 CROSS JOIN
     (SELECT firstname as monitor FROM Monitor
@@ -34,7 +34,7 @@ LIMIT 1;
 DROP VIEW IF EXISTS DeepSite CASCADE;
 CREATE VIEW DeepSite AS
 SELECT * FROM
-    (SELECT 'deep' as divetype, count(*) num_site FROM Site
+    (SELECT CAST('deep' AS dive_type) as divetype, count(*) num_site FROM Site
     WHERE (max_daydeep <> 0) OR (max_nightdeep <> 0)) SiteCount
 CROSS JOIN
     (SELECT firstname as monitor FROM Monitor
