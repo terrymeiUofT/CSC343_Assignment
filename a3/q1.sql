@@ -6,7 +6,7 @@ DROP TABLE IF EXISTS q1 CASCADE;
 
 CREATE TYPE dive_type AS ENUM ('open', 'cave', 'deep');
 CREATE TABLE q1 (
-    divetype divetype NOT NULL PRIMARY KEY,
+    divetype dive_type NOT NULL PRIMARY KEY,
     num_site INT NOT NULL,
     monitor VARCHAR(50)
 );
