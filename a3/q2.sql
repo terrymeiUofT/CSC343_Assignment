@@ -14,9 +14,11 @@ CREATE TABLE q2 (
 -- Define views for your intermediate steps here:
 DROP VIEW IF EXISTS MonRating CASCADE;
 CREATE VIEW MonRating AS
-SELECT monid, siteid, monrating FROM
-Booking JOIN PastSession
-ON Booking.id = PastSession.id;
+SELECT monid, siteid, avg(monrating) FROM
+    (SELECT monid, siteid, monrating FROM
+    Booking JOIN PastSession
+    ON Booking.id = PastSession.id) info
+GROUP BY monid, siteid;
 
 
 -- Your query that answers the question goes below the "insert into" line:
