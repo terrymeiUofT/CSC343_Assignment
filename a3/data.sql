@@ -12,11 +12,11 @@ VALUES
     (7, 'Oscar', NULL, '1977-08-08', NULL, 'PADI');
 
 INSERT INTO
-Monitor (id, firstname, watersize, cavesize, deepsize)
+Monitor (id, firstname, email, watersize, cavesize, deepsize)
 VALUES
-    (1, 'Maria', 10, 5, 5),
-    (2, 'John', 15, 5, 0),
-    (3, 'Ben', 15, 8, 5);
+    (1, 'Maria', 'maria.diving@gmail.com', 10, 5, 5),
+    (2, 'John', 'john.diving@hotmail.com', 15, 5, 0),
+    (3, 'Ben', 'ben.diving@outlook.com', 15, 8, 5);
 
 INSERT INTO
 Shift (monid, secondlast, lastshift)

@@ -51,6 +51,7 @@ CREATE TABLE Monitor (
   id INT PRIMARY KEY,
   -- The first name of the monitor.
   firstname VARCHAR(50) NOT NULL,
+  email VARCHAR(50),
   -- The maximum group size a monitor is willing to take for each category.
   -- The monitor does not accept bookings to a type of dive if the maximum
   -- capacity is zero.
