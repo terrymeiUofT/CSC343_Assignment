@@ -29,8 +29,22 @@ SELECT monid, avg(monrating) mon_avg FROM
     ON Booking.id = PastSession.id) info
 GROUP BY monid;
 
-
-
+-- create a view of all monitor-site pair (not every possible one, but only
+-- the ones that have a relationship), attached with the two avg rating
+-- calculated above.
+DROP VIEW IF EXISTS SiteMonRatings CASCADE;
+CREATE VIEW SiteMonRatings AS
+SELECT siteid, monid, site_avg, mon_avg FROM
+    (SELECT siteid, monid, site_avg, FROM
+        ((SELECT siteid, monid FROM MonitorWaterFee)
+        UNION
+        (SELECT siteid, monid FROM MonitorCaveFee)
+        UNION
+        (SELECT siteid, monid FROM MonitorDeepFee)) pair
+    JOIN
+        SiteAvgRating) pair1
+JOIN
+    MonAvgRating;
 
 
 -- for each monitor-site pair, calculate its average rating
