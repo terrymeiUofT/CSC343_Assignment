@@ -34,14 +34,19 @@ GROUP BY monid;
 -- calculated above.
 DROP VIEW IF EXISTS SiteMonRatings CASCADE;
 CREATE VIEW SiteMonRatings AS
-SELECT siteid, monid, site_avg FROM
-    ((SELECT siteid, monid FROM MonitorWaterFee)
-    UNION
-    (SELECT siteid, monid FROM MonitorCaveFee)
-    UNION
-    (SELECT siteid, monid FROM MonitorDeepFee)) pair
+SELECT siteid, monid, site_avg, mon_avg FROM
+    (SELECT siteid, monid, site_avg FROM
+        ((SELECT siteid, monid FROM MonitorWaterFee)
+        UNION
+        (SELECT siteid, monid FROM MonitorCaveFee)
+        UNION
+        (SELECT siteid, monid FROM MonitorDeepFee)) pair
+    JOIN
+        SiteAvgRating
+    ON pair.siteid = SiteAvgRating.siteid) temp
 JOIN
-    SiteAvgRating;
+    MonAvgRating
+ON temp.monid = MonAvgRating.monid;
 
 
 -- for each monitor-site pair, calculate its average rating
