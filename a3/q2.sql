@@ -34,8 +34,8 @@ GROUP BY monid;
 -- calculated above.
 DROP VIEW IF EXISTS SiteMonRatings CASCADE;
 CREATE VIEW SiteMonRatings AS
-SELECT siteid, monid, site_avg, mon_avg FROM
-    (SELECT siteid, monid, site_avg FROM
+SELECT siteid, MonAvgRating.monid, site_avg, mon_avg FROM
+    (SELECT SiteAvgRating.siteid, monid, site_avg FROM
         ((SELECT siteid, monid FROM MonitorWaterFee)
         UNION
         (SELECT siteid, monid FROM MonitorCaveFee)
