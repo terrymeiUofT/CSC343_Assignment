@@ -74,7 +74,7 @@ SELECT id, siteid, (session_price + extra_price) as total_fee FROM
 -- for each site, compute the highest/lowest/average fee charged
 -- Your query that answers the question goes below the "insert into" line:
 INSERT INTO q4
-SELECT siteid, name, high, low, average FROM
+SELECT Site.id, Site.name, high, low, average FROM
     (SELECT siteid, max(total_fee) as high, min(total_fee) as low,
     avg(total_fee) as average
     FROM TotalFee
