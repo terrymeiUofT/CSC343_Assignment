@@ -76,8 +76,7 @@ UNION ALL
 -- count the number of dive type each monitor provides.
 DROP VIEW IF EXISTS MonNumType CASCADE;
 CREATE VIEW MonNumType AS
-SELECT monid, count(morning) num_am, count(afternoon) num_pm, count(night)
-num_night
+SELECT monid, count(morning) + count(afternoon) + count(night) AS num_type
 FROM MonAllFees
 GROUP BY monid;
 
