@@ -90,12 +90,17 @@ ON Booking.id = PastSession.id;
 -- Calculate average occupancy for each site
 DROP VIEW IF EXISTS AvgOccupancy CASCADE;
 CREATE VIEW AvgOccupancy AS
-SELECT siteid, avg(s_size) FROM SiteOccupancy
+SELECT siteid, avg(s_size) avg_occ FROM SiteOccupancy
 GROUP BY siteid;
 
--- DROP VIEW IF EXISTS FullerSites CASCADE;
--- CREATE VIEW FullerSites AS
-
+-- Identify the sites that have avg occupancy that is above half of its capacity
+DROP VIEW IF EXISTS FullerSites CASCADE;
+CREATE VIEW FullerSites AS
+SELECT siteid FROM
+    (SELECT siteid, avg_occ, capacity
+    FROM AvgOccupancy JOIN SiteCapacity
+    ON siteid = id) temp
+WHERE avg_occ > (0.5)*capacity;
 
 
 
