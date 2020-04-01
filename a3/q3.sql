@@ -102,6 +102,12 @@ SELECT siteid FROM
     ON siteid = id) temp
 WHERE avg_occ > (0.5)*capacity;
 
+-- The rest of the sites are the less full sites
+DROP VIEW IF EXISTS LessFullSites CASCADE;
+CREATE VIEW LessFullSites AS
+(SELECT id FROM Site)
+EXCEPT
+(SELECT siteid FROM FullerSites);
 
 
 -- Your query that answers the question goes below the "insert into" line:
