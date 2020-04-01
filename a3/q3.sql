@@ -42,19 +42,19 @@ ON temp.siteid = SiteDeepPrice.siteid;
 -- Get useful info on past sessions in one table
 DROP VIEW IF EXISTS PastInfo CASCADE;
 CREATE VIEW PastInfo AS
-SELECT id, siteid, s_time, s_size, divetype, num_mask, num_regulator, num_fins,
-num_divecomp, mask, regulator, fins, divecomp,
-CASE WHEN extract(hour from s_time) = '09' AND divetype = 'open' THEN mor_w
-     WHEN extract(hour from s_time) = '12' AND divetype = 'open' THEN aft_w
-     WHEN extract(hour from s_time) = '20' AND divetype = 'open' THEN nit_w
-     WHEN extract(hour from s_time) = '09' AND divetype = 'cave' THEN mor_c
-     WHEN extract(hour from s_time) = '12' AND divetype = 'cave' THEN aft_c
-     WHEN extract(hour from s_time) = '20' AND divetype = 'cave' THEN nit_c
-     WHEN extract(hour from s_time) = '09' AND divetype = 'deep' THEN mor_d
-     WHEN extract(hour from s_time) = '12' AND divetype = 'deep' THEN aft_d
-     WHEN extract(hour from s_time) = '20' AND divetype = 'deep' THEN nit_d
-     END
-     AS session_price
+SELECT id, itemInfo.siteid, s_time, s_size, divetype, num_mask, num_regulator,
+num_fins, num_divecomp, mask, regulator, fins, divecomp,
+    CASE WHEN extract(hour from s_time) = '09' AND divetype = 'open' THEN mor_w
+         WHEN extract(hour from s_time) = '12' AND divetype = 'open' THEN aft_w
+         WHEN extract(hour from s_time) = '20' AND divetype = 'open' THEN nit_w
+         WHEN extract(hour from s_time) = '09' AND divetype = 'cave' THEN mor_c
+         WHEN extract(hour from s_time) = '12' AND divetype = 'cave' THEN aft_c
+         WHEN extract(hour from s_time) = '20' AND divetype = 'cave' THEN nit_c
+         WHEN extract(hour from s_time) = '09' AND divetype = 'deep' THEN mor_d
+         WHEN extract(hour from s_time) = '12' AND divetype = 'deep' THEN aft_d
+         WHEN extract(hour from s_time) = '20' AND divetype = 'deep' THEN nit_d
+         END
+         AS session_price
 FROM
     (SELECT id, itemInfo.siteid, s_time, s_size, divetype, num_mask,
     num_regulator, num_fins, num_divecomp, mask, regulator, fins, divecomp
