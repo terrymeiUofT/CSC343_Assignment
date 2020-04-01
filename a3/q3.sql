@@ -57,10 +57,10 @@ CASE WHEN extract(hour from s_time) = '09' AND divetype = 'open' THEN mor_w
      AS session_price
 FROM
     (SELECT id, siteid, s_time, s_size, divetype, num_mask, num_regulator,
-    num_fins,
-    num_divecomp, mask, regulator, fins, divecomp FROM
-        (SELECT id, siteid, s_time, s_size, divetype, num_mask, num_regulator,
-        num_fins, num_divecomp
+    num_fins, num_divecomp, mask, regulator, fins, divecomp
+    FROM
+        (SELECT PastSession.id, siteid, s_time, s_size, divetype, num_mask,
+        num_regulator, num_fins, num_divecomp
         FROM PastSession JOIN Booking
         ON PastSession.id = Booking.id) itemInfo
     JOIN
