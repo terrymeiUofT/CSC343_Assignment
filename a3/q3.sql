@@ -83,8 +83,7 @@ FROM Site;
 -- Find out Site occupancy for each booking
 DROP VIEW IF EXISTS SiteOccupancy CASCADE;
 CREATE VIEW SiteOccupancy AS
-SELECT Booking.id, siteid, extract(year from s_time) op_year,
-extract(month from s_time) op_month, extract(day from s_time) op_day, s_size
+SELECT Booking.id, siteid, s_size
 FROM Booking JOIN PastSession
 ON Booking.id = PastSession.id;
 
