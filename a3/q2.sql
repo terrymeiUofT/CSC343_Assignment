@@ -92,7 +92,8 @@ DROP VIEW IF EXISTS MonAvgFee CASCADE;
 CREATE VIEW MonAvgFee AS
 SELECT monid, total_fee/num_type AS avg_fee FROM
     (SELECT MonTotalFee.monid, total_fee, num_type
-    FROM MonTotalFee, MonNumType) temp;
+    FROM MonTotalFee, MonNumType) temp
+GROUP BY monid;
 
 -- Your query that answers the question goes below the "insert into" line:
 -- INSERT INTO q2
