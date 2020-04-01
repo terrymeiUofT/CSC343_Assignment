@@ -74,9 +74,9 @@ ON extrainfo.siteid = SiteAllPrices.siteid;
 DROP VIEW IF EXISTS TotalFee CASCADE;
 CREATE VIEW TotalFee AS
 SELECT id, siteid, s_size, (session_price + extra_price) as total_fee FROM
-    (SELECT id, siteid, s_size, session_price, (num_mask*ISNULL(mask, 0) +
-    num_regulator*ISNULL(regulator, 0) + num_fins*ISNULL(fins, 0) +
-    num_divecomp*ISNULL(divecomp, 0)) as
+    (SELECT id, siteid, s_size, session_price, (num_mask*coalesce(mask, 0) +
+    num_regulator*coalesce(regulator, 0) + num_fins*coalesce(fins, 0) +
+    num_divecomp*coalesce(divecomp, 0)) as
     extra_price
     FROM PastInfo) temp;
 
