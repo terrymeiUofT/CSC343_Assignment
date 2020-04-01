@@ -66,15 +66,12 @@ ON extrainfo.siteid = SiteAllPrices.siteid;
 -- calculate the total fee for each past dive
 DROP VIEW IF EXISTS TotalFee CASCADE;
 CREATE VIEW TotalFee AS
-SELECT id, siteid, s_size, (session_price + extra_price) as total_fee FROM
-    (SELECT id, siteid, s_size, session_price, (num_mask*coalesce(mask, 0) +
+SELECT id, siteid, (session_price + extra_price) as total_fee FROM
+    (SELECT id, siteid, session_price, (num_mask*coalesce(mask, 0) +
     num_regulator*coalesce(regulator, 0) + num_fins*coalesce(fins, 0) +
     num_divecomp*coalesce(divecomp, 0)) as
     extra_price
     FROM PastInfo) temp;
-
-SELECT siteid, avg(total_fee) FROM TotalFee
-GROUP BY siteid;
 
 -- Calculate Site Capacity per day
 DROP VIEW IF EXISTS SiteCapacity CASCADE;
@@ -112,5 +109,25 @@ CREATE VIEW LessFullSites AS
 EXCEPT
 (SELECT siteid FROM FullerSites);
 
+--
+(SELECT id, TotalFee.siteid, total_fee, 'fuller' as site_type
+FROM TotalFee JOIN FullerSites
+ON TotalFee.siteid = FullerSites.siteid)
+UNION
+(SELECT id, TotalFee.siteid, total_fee, 'lessfull' as site_type
+FROM TotalFee JOIN LessFullSites
+ON TotalFee.siteid = LessFullSites.siteid)
+
+
 -- Your query that answers the question goes below the "insert into" line:
-INSERT INTO q3
+-- INSERT INTO q3
+
+
+
+
+
+-- calculate the average fee for each site
+DROP VIEW IF EXISTS AvgFee CASCADE;
+CREATE VIEW AvgFee AS
+SELECT siteid, avg(total_fee) FROM TotalFee
+GROUP BY siteid;
