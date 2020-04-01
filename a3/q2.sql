@@ -97,7 +97,7 @@ SELECT monid, total_fee/num_type AS avg_fee FROM
 
 -- Your query that answers the question goes below the "insert into" line:
 INSERT INTO q2
-SELECT monid, firstname, avg_fee, email FROM
+SELECT temp.monid, firstname, avg_fee, email FROM
     (SELECT TargetMonitors.monid, firstname, email
     FROM TargetMonitors JOIN Monitor
     ON TargetMonitors.monid = Monitor.id) temp
