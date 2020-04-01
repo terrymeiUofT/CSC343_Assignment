@@ -71,8 +71,12 @@ JOIN
 ON extrainfo.siteid = SiteAllPrices.siteid;
 
 -- calculate the total fee for each past dive
-
-
+DROP VIEW IF EXISTS TotalFee CASCADE;
+CREATE VIEW TotalFee AS
+SELECT id, siteid, s_size, session_price + extra_price as total_fee FROM
+    (SELECT id, siteid, s_size, session_price, (num_mask*mask +
+    num_regulator*regulator + num_fins*fins + num_divecomp * divecomp) as
+    extra_price) temp;
 
 -- Calculate average occupancy for each site
 DROP VIEW IF EXISTS AvgOccupancy CASCADE;
