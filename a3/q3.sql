@@ -81,6 +81,8 @@ SELECT id, name, (max_daywater + max_nightwater + max_daycave + max_nightcave
 FROM Site;
 
 -- Find out Site occupancy for each booking
+DROP VIEW IF EXISTS SiteOccupancy CASCADE;
+CREATE VIEW SiteOccupancy AS
 SELECT Booking.id, siteid, extract(year from s_time) op_year,
 extract(month from s_time) op_month, extract(day from s_time) op_day, s_size
 FROM Booking JOIN PastSession
@@ -89,7 +91,8 @@ ON Booking.id = PastSession.id;
 -- Calculate average occupancy for each site
 DROP VIEW IF EXISTS AvgOccupancy CASCADE;
 CREATE VIEW AvgOccupancy AS
-SELECT
+SELECT siteid, avg(s_size) FROM SiteOccupancy
+GROUP BY siteid;
 
 -- DROP VIEW IF EXISTS FullerSites CASCADE;
 -- CREATE VIEW FullerSites AS
