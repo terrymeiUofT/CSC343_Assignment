@@ -10,7 +10,7 @@ DROP TABLE IF EXISTS q3 CASCADE;
 
 CREATE TABLE q3 (
     site_type VARCHAR(10) PRIMARY KEY NOT NULL,
-    average_fee DECIMAL NOT NULL
+    average_fee DECIMAL
 );
 
 -- Define views for your intermediate steps here:
@@ -119,7 +119,19 @@ UNION
 FROM TotalFee JOIN LessFullSites
 ON TotalFee.siteid = LessFullSites.id);
 
+--
+DROP VIEW IF EXISTS FinalStruct CASCADE;
+CREATE VIEW FinalStruct AS
+(SELECT 'fuller' as site_type)
+UNION
+(SELECT 'lessfull' as site_type);
+
+
 -- Your query that answers the question goes below the "insert into" line:
 INSERT INTO q3
-SELECT site_type, avg(total_fee) average_fee FROM SplitBookings
-GROUP BY site_type;
+SELECT FinalStruct.site_type, average_fee FROM
+    (SELECT site_type, avg(total_fee) average_fee FROM SplitBookings
+    GROUP BY site_type) temp
+RIGHT JOIN
+    FinalStruct
+ON FinalStruct.site_type = temp.site_type;
