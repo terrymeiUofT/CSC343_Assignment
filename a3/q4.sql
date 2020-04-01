@@ -14,6 +14,7 @@ CREATE TABLE q4 (
 
 -- Define views for your intermediate steps here:
 
+-- Combine all prices a site charges in one table
 DROP VIEW IF EXISTS SiteAllPrices CASCADE;
 CREATE VIEW SiteAllPrices AS
 SELECT temp.siteid, mor_w, aft_w, nit_w, mor_c, aft_c, nit_c,
@@ -71,6 +72,8 @@ SELECT id, siteid, (session_price + extra_price) as total_fee FROM
     FROM PastInfo) temp;
 
 -- for each site, compute the highest/lowest/average fee charged
+-- Your query that answers the question goes below the "insert into" line:
+INSERT INTO q4
 SELECT siteid, name, high, low, average FROM
     (SELECT siteid, max(total_fee) as high, min(total_fee) as low,
     avg(total_fee) as average
