@@ -116,7 +116,7 @@ ON TotalFee.siteid = FullerSites.siteid)
 UNION
 (SELECT id, TotalFee.siteid, total_fee, 'lessfull' as site_type
 FROM TotalFee JOIN LessFullSites
-ON TotalFee.siteid = LessFullSites.siteid)
+ON TotalFee.siteid = LessFullSites.siteid);
 
 
 -- Your query that answers the question goes below the "insert into" line:
