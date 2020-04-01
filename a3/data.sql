@@ -115,7 +115,7 @@ VALUES
     (4, 3, 22, 22, 22);
 
 INSERT INTO
-Booking (id, leadid, monid, siteid, time, size, divetype, num_mask,
+Booking (id, leadid, monid, siteid, s_time, s_size, divetype, num_mask,
 num_regulator, num_fins, num_divecomp)
 VALUES
     (1, 1, 1, 2, '2019-07-20 09:30:00', 5, 'open', 0, 0, 0, 0),
@@ -157,7 +157,7 @@ VALUES
 INSERT INTO
 PastSession (id, monrating, leadrating)
 VALUES
-    (1, 20000, 4),
+    (1, 2, 4),
     (2, 0, 4),
     (3, 5, 4),
     (4, 2, 4),
