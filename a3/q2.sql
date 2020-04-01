@@ -48,6 +48,47 @@ JOIN
     MonAvgRating
 ON temp.monid = MonAvgRating.monid;
 
+-- select the monitors that have lower or equal avg than all of the sites that
+-- he/she works on.
+DROP VIEW IF EXISTS BadMonitors CASCADE;
+CREATE VIEW BadMonitors AS
+SELECT monid FROM SiteMonRatings
+WHERE mon_avg <= site_avg;
+
+-- eliminate these monitors from the pool of monitors in the SiteMonRatings
+-- table and we will get the ones that have avg rating higher than that of all
+-- the sites he/she works on.
+DROP VIEW IF EXISTS TargetMonitors CASCADE;
+CREATE VIEW TargetMonitors AS
+(SELECT DISTINCT monid FROM SiteMonRatings)
+EXCEPT
+(SELECT DISTINCT monid FROM BadMonitors);
+
+-- combine all fees into 1 view for these monitors.
+DROP VIEW IF EXISTS MonAllFees CASCADE;
+CREATE VIEW MonAllFees AS
+(SELECT * FROM MonitorWaterFee)
+UNION ALL
+(SELECT * FROM MonitorCaveFee)
+UNION ALL
+(SELECT * FROM MonitorDeepFee);
+
+-- count the number of dive type each monitor provides.
+DROP VIEW IF EXISTS MonNumType CASCADE;
+CREATE VIEW MonNumType AS
+SELECT monid, count(morning) num_am, count(afternoon) num_pm, count(night)
+num_night
+FROM MonAllFees
+GROUP BY monid;
+
+
+
+-- Your query that answers the question goes below the "insert into" line:
+INSERT INTO q2
+SELECT monid FROM TargetMonitors,
+
+
+
 
 -- for each monitor-site pair, calculate its average rating
 DROP VIEW IF EXISTS MonRating CASCADE;
@@ -64,10 +105,3 @@ CREATE VIEW BestRating AS
 SELECT siteid, max(avgrating)
 FROM MonRating
 GROUP BY siteid;
-
-
-
-
-
--- Your query that answers the question goes below the "insert into" line:
--- INSERT INTO q2
