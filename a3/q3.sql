@@ -16,13 +16,6 @@ CREATE TABLE q3 (
 
 -- Define views for your intermediate steps here:
 
--- Calculate Site Capacity per day
-DROP VIEW IF EXISTS SiteCapacity CASCADE;
-CREATE VIEW SiteCapacity AS
-SELECT id, name, (max_daywater + max_nightwater + max_daycave + max_nightcave
-+ max_daydeep + max_nightdeep) as capacity
-FROM Site;
-
 -- Combine all prices a site charges in one table
 DROP VIEW IF EXISTS SiteAllPrices CASCADE;
 CREATE VIEW SiteAllPrices AS
@@ -79,6 +72,18 @@ SELECT id, siteid, s_size, (session_price + extra_price) as total_fee FROM
     num_divecomp*coalesce(divecomp, 0)) as
     extra_price
     FROM PastInfo) temp;
+
+-- Calculate Site Capacity per day
+DROP VIEW IF EXISTS SiteCapacity CASCADE;
+CREATE VIEW SiteCapacity AS
+SELECT id, name, (max_daywater + max_nightwater + max_daycave + max_nightcave
++ max_daydeep + max_nightdeep) as capacity
+FROM Site;
+
+-- Find out Site occupancy for each booking
+SELECT id, sitieid, extract(date from s_time) op_day, s_size
+FROM Booking JOIN PastSession
+ON Booking.id = PastSession.id;
 
 -- Calculate average occupancy for each site
 DROP VIEW IF EXISTS AvgOccupancy CASCADE;
