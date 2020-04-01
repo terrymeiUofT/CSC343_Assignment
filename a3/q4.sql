@@ -1,21 +1,19 @@
--- Q3.
--- Assumptions:
--- 1. The average fee charged per dive
---    = (The sum of past dives' total fee)/(number of dives)
---    The total fee of one dive accounts for all the fees occurred to the group.
+-- Q4.
 
 -- You must not change the next 2 lines or the table definition.
 SET SEARCH_PATH TO wetworldschema;
-DROP TABLE IF EXISTS q3 CASCADE;
+DROP TABLE IF EXISTS q4 CASCADE;
 
-CREATE TABLE q3 (
-    site_type VARCHAR(10) PRIMARY KEY NOT NULL,
-    average_fee DECIMAL NOT NULL
+CREATE TABLE q4 (
+    siteid INT PRIMARY KEY NOT NULL,
+    name VARCHAR(50) NOT NULL,
+    high DECIMAL,
+    low DECIMAL,
+    average DECIMAL
 );
 
 -- Define views for your intermediate steps here:
 
--- Combine all prices a site charges in one table
 DROP VIEW IF EXISTS SiteAllPrices CASCADE;
 CREATE VIEW SiteAllPrices AS
 SELECT temp.siteid, mor_w, aft_w, nit_w, mor_c, aft_c, nit_c,
@@ -72,54 +70,11 @@ SELECT id, siteid, (session_price + extra_price) as total_fee FROM
     extra_price
     FROM PastInfo) temp;
 
--- Calculate Site Capacity per day
-DROP VIEW IF EXISTS SiteCapacity CASCADE;
-CREATE VIEW SiteCapacity AS
-SELECT id, name, (max_daywater + max_nightwater + max_daycave + max_nightcave
-+ max_daydeep + max_nightdeep) as capacity
-FROM Site;
+-- for each site, compute the highest fee charged
 
--- Find out Site occupancy for each booking
-DROP VIEW IF EXISTS SiteOccupancy CASCADE;
-CREATE VIEW SiteOccupancy AS
-SELECT Booking.id, siteid, s_size
-FROM Booking JOIN PastSession
-ON Booking.id = PastSession.id;
 
--- Calculate average occupancy for each site
-DROP VIEW IF EXISTS AvgOccupancy CASCADE;
-CREATE VIEW AvgOccupancy AS
-SELECT siteid, avg(s_size) avg_occ FROM SiteOccupancy
-GROUP BY siteid;
 
--- Identify the sites that have avg occupancy that is above half of its capacity
-DROP VIEW IF EXISTS FullerSites CASCADE;
-CREATE VIEW FullerSites AS
-SELECT siteid FROM
-    (SELECT siteid, avg_occ, capacity
-    FROM AvgOccupancy JOIN SiteCapacity
-    ON siteid = id) temp
-WHERE avg_occ > (0.5)*capacity;
 
--- The rest of the sites are the less full sites
-DROP VIEW IF EXISTS LessFullSites CASCADE;
-CREATE VIEW LessFullSites AS
-(SELECT id FROM Site)
-EXCEPT
-(SELECT siteid FROM FullerSites);
+-- for each site, compute the lowest fee charged
 
--- assign site_type: {fuller, lessfull} to each past booking
-DROP VIEW IF EXISTS SplitBookings CASCADE;
-CREATE VIEW SplitBookings AS
-(SELECT id, TotalFee.siteid, total_fee, 'fuller' as site_type
-FROM TotalFee JOIN FullerSites
-ON TotalFee.siteid = FullerSites.siteid)
-UNION
-(SELECT TotalFee.id, TotalFee.siteid, total_fee, 'lessfull' as site_type
-FROM TotalFee JOIN LessFullSites
-ON TotalFee.siteid = LessFullSites.id);
-
--- Your query that answers the question goes below the "insert into" line:
-INSERT INTO q3
-SELECT site_type, avg(total_fee) average_fee FROM SplitBookings
-GROUP BY site_type;
+-- for each site, compute the average fee charged
