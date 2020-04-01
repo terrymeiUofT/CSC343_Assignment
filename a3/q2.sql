@@ -87,6 +87,13 @@ SELECT monid, sum(morning) + sum(afternoon) + sum(night) AS total_fee
 FROM MonAllFees
 GROUP BY monid;
 
+-- average booking fees for each monitor
+DROP VIEW IF EXISTS MonAvgFee CASCADE;
+CREATE VIEW MonAvgFee AS
+SELECT monid, total_fee/num_type AS avg_fee FROM
+    (SELECT MonTotalFee.monid, total_fee, num_type
+    FROM MonTotalFee, MonNumType) temp;
+
 -- Your query that answers the question goes below the "insert into" line:
 -- INSERT INTO q2
 -- SELECT monid FROM TargetMonitors,
