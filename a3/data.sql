@@ -157,7 +157,7 @@ VALUES
 INSERT INTO
 PastSession (id, monrating, leadrating)
 VALUES
-    (1, 2, 4),
+    (1, 20000, 4),
     (2, 0, 4),
     (3, 5, 4),
     (4, 2, 4),
