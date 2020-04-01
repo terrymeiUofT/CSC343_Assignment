@@ -7,7 +7,7 @@ DROP TABLE IF EXISTS q2 CASCADE;
 CREATE TABLE q2 (
     monid INT NOT NULL PRIMARY KEY,
     firstname VARCHAR(50) NOT NULL,
-    avg_fees DECIMAL NOT NULL,
+    avg_fee DECIMAL NOT NULL,
     email VARCHAR(50) NOT NULL
 );
 
@@ -96,24 +96,11 @@ SELECT monid, total_fee/num_type AS avg_fee FROM
     ON MonTotalFee.monid = MonNumType.monid) temp;
 
 -- Your query that answers the question goes below the "insert into" line:
--- INSERT INTO q2
--- SELECT monid FROM TargetMonitors,
-
-
-
-
--- for each monitor-site pair, calculate its average rating
-DROP VIEW IF EXISTS MonRating CASCADE;
-CREATE VIEW MonRating AS
-SELECT monid, siteid, avg(monrating) avgrating FROM
-    (SELECT monid, siteid, monrating FROM
-    Booking JOIN PastSession
-    ON Booking.id = PastSession.id) info
-GROUP BY monid, siteid;
-
--- for each site, find the highest average rating
-DROP VIEW IF EXISTS BestRating CASCADE;
-CREATE VIEW BestRating AS
-SELECT siteid, max(avgrating)
-FROM MonRating
-GROUP BY siteid;
+INSERT INTO q2
+SELECT monid, firstname, avg_fee, email FROM
+    (SELECT TargetMonitors.monid, firstname, email
+    FROM TargetMonitors JOIN Monitor
+    ON TargetMoniors.monid = Monitor.id) temp
+JOIN
+MonAvgFee
+ON temp.monid = MonAvgFee.monid;
