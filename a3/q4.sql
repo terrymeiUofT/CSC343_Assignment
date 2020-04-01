@@ -71,7 +71,10 @@ SELECT id, siteid, (session_price + extra_price) as total_fee FROM
     FROM PastInfo) temp;
 
 -- for each site, compute the highest/lowest/average fee charged
-SELECT siteid, max(total_fee) as high, min(total_fee) as low, avg(total_fee)
-as average
-FROM TotalFee
-GROUP BY siteid;
+SELECT siteid, name, high, low, average FROM
+    (SELECT siteid, max(total_fee) as high, min(total_fee) as low,
+    avg(total_fee) as average
+    FROM TotalFee
+    GROUP BY siteid) stats
+JOIN
+Site ON siteid = id;
