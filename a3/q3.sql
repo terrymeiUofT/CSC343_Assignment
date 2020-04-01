@@ -9,9 +9,8 @@ SET SEARCH_PATH TO wetworldschema;
 DROP TABLE IF EXISTS q3 CASCADE;
 
 CREATE TABLE q3 (
-    divetype dive_type NOT NULL PRIMARY KEY,
-    num_site INT NOT NULL,
-    monitor VARCHAR(50)
+    site_type VARCHAR(10) PRIMARY KEY NOT NULL,
+    average_fee DECIMAL NOT NULL
 );
 
 -- Define views for your intermediate steps here:
@@ -109,7 +108,9 @@ CREATE VIEW LessFullSites AS
 EXCEPT
 (SELECT siteid FROM FullerSites);
 
---
+-- assign site_type: {fuller, lessfull} to each past booking
+DROP VIEW IF EXISTS SplitBookings CASCADE;
+CREATE VIEW SplitBookings AS
 (SELECT id, TotalFee.siteid, total_fee, 'fuller' as site_type
 FROM TotalFee JOIN FullerSites
 ON TotalFee.siteid = FullerSites.siteid)
@@ -120,14 +121,6 @@ ON TotalFee.siteid = LessFullSites.id);
 
 
 -- Your query that answers the question goes below the "insert into" line:
--- INSERT INTO q3
-
-
-
-
-
--- calculate the average fee for each site
-DROP VIEW IF EXISTS AvgFee CASCADE;
-CREATE VIEW AvgFee AS
-SELECT siteid, avg(total_fee) FROM TotalFee
-GROUP BY siteid;
+INSERT INTO q3
+SELECT site_type, avg(total_fee) average_fee FROM SplitBookings
+GROUP BY site_type;
