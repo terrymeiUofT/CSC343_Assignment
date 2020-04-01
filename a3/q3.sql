@@ -73,6 +73,9 @@ SELECT id, siteid, s_size, (session_price + extra_price) as total_fee FROM
     extra_price
     FROM PastInfo) temp;
 
+SELECT siteid, avg(total_fee) FROM TotalFee
+GROUP BY siteid;
+
 -- Calculate Site Capacity per day
 DROP VIEW IF EXISTS SiteCapacity CASCADE;
 CREATE VIEW SiteCapacity AS
@@ -109,6 +112,5 @@ CREATE VIEW LessFullSites AS
 EXCEPT
 (SELECT siteid FROM FullerSites);
 
-
 -- Your query that answers the question goes below the "insert into" line:
--- INSERT INTO q3
+INSERT INTO q3
