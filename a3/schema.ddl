@@ -161,9 +161,9 @@ CREATE TABLE Booking (
   monid INT REFERENCES Monitor,
   siteid INT REFERENCES Site,
   -- The date and time of this booking.
-  time timestamp NOT NULL,
+  s_time timestamp NOT NULL,
   -- The group size of this booking.
-  size INT NOT NULL,
+  s_size INT NOT NULL,
   -- The dive type of this booking.
   divetype dive_type NOT NULL,
   -- The additional rental items for this booking.
