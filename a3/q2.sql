@@ -80,7 +80,12 @@ SELECT monid, count(morning) + count(afternoon) + count(night) AS num_type
 FROM MonAllFees
 GROUP BY monid;
 
-
+-- sum the total fees for each monitor.
+DROP VIEW IF EXISTS MonTotalFee CASCADE;
+CREATE VIEW MonTotalFee AS
+SELECT monid, morning + afternoon + nigth AS total_fee
+FROM MonAllFees
+GROUP BY monid;
 
 -- Your query that answers the question goes below the "insert into" line:
 -- INSERT INTO q2
