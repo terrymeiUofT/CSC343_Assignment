@@ -76,7 +76,8 @@ CREATE VIEW TotalFee AS
 SELECT id, siteid, s_size, session_price + extra_price as total_fee FROM
     (SELECT id, siteid, s_size, session_price, (num_mask*mask +
     num_regulator*regulator + num_fins*fins + num_divecomp * divecomp) as
-    extra_price) temp;
+    extra_price
+    FROM PastInfo) temp;
 
 -- Calculate average occupancy for each site
 DROP VIEW IF EXISTS AvgOccupancy CASCADE;
