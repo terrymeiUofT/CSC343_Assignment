@@ -114,7 +114,7 @@ EXCEPT
 FROM TotalFee JOIN FullerSites
 ON TotalFee.siteid = FullerSites.siteid)
 UNION
-(SELECT id, TotalFee.siteid, total_fee, 'lessfull' as site_type
+(SELECT TotalFee.id, TotalFee.siteid, total_fee, 'lessfull' as site_type
 FROM TotalFee JOIN LessFullSites
 ON TotalFee.siteid = LessFullSites.id);
 
