@@ -83,8 +83,7 @@ GROUP BY monid;
 -- sum the total fees for each monitor.
 DROP VIEW IF EXISTS MonTotalFee CASCADE;
 CREATE VIEW MonTotalFee AS
-SELECT monid, morning, afternoon, night, morning + afternoon + night AS
-total_fee
+SELECT monid, sum(morning) + sum(afternoon) + sum(night) AS total_fee
 FROM MonAllFees
 GROUP BY monid;
 
