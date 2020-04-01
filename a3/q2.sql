@@ -100,7 +100,7 @@ INSERT INTO q2
 SELECT monid, firstname, avg_fee, email FROM
     (SELECT TargetMonitors.monid, firstname, email
     FROM TargetMonitors JOIN Monitor
-    ON TargetMoniors.monid = Monitor.id) temp
+    ON TargetMonitors.monid = Monitor.id) temp
 JOIN
 MonAvgFee
 ON temp.monid = MonAvgFee.monid;
