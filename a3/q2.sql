@@ -84,8 +84,8 @@ GROUP BY monid;
 
 
 -- Your query that answers the question goes below the "insert into" line:
-INSERT INTO q2
-SELECT monid FROM TargetMonitors,
+-- INSERT INTO q2
+-- SELECT monid FROM TargetMonitors,
 
 
 
