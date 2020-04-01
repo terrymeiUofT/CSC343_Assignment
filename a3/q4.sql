@@ -79,5 +79,5 @@ SELECT siteid, name, high, low, average FROM
     avg(total_fee) as average
     FROM TotalFee
     GROUP BY siteid) stats
-JOIN
+RIGHT JOIN
 Site ON siteid = id;
