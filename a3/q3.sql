@@ -81,7 +81,8 @@ SELECT id, name, (max_daywater + max_nightwater + max_daycave + max_nightcave
 FROM Site;
 
 -- Find out Site occupancy for each booking
-SELECT Booking.id, siteid, extract(date from s_time) op_day, s_size
+SELECT Booking.id, siteid, extract(year from s_time) op_year,
+extract(month from s_time) op_month, extract(day from s_time) op_day, s_size
 FROM Booking JOIN PastSession
 ON Booking.id = PastSession.id;
 
